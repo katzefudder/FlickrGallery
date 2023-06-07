@@ -1,0 +1,139 @@
+.pswp__custom-caption {
+  background: rgba(162, 164, 162, 0.75);
+  font-size: 16px;
+  color: #fff;
+  width: calc(100% - 32px);
+  max-width: 400px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  text-align: center;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+.hidden-caption-content {
+  display: none;
+}
+
+/* ******* FLICKR ******* */
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+#flickr a {
+  display: inline;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  #flickr a {
+    display: table;
+    margin: auto;
+  }
+  #flickr img {
+    width: auto;
+    max-width: 300px;
+    margin: 5px 30px 10px 0;
+  }
+  .intro {
+    background-position: 70%;
+  }
+  header .intro-text {
+    padding-top: 10px;
+    padding-bottom: 340px;
+  }
+  .intro-text h1 {
+    font-size: 36px;
+  }
+  .intro-text h2 {
+    font-size: 28px;
+  }
+  .intro-text h3 {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #flickr img {
+    width: 180px;
+    margin: 5px 30px 10px 0px;
+  }
+}
+
+.flickr-l {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+.flickr-l-content {
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.flickr-l-navigation {
+  margin: auto;
+  padding: 0;
+  width: 90%;
+}
+
+.flickr-l-caption {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+
+#flickr .flickr-l-content img {
+  width: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 1200px;
+  max-height: 800px;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

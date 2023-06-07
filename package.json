@@ -1,0 +1,37 @@
+{
+  "name": "@katzefudder/flickrgallery",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "photoswipe": "^5.3.6",
+    "axios": "^1.3.4",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "sass": "^1.60.0",
+    "vite": "^4.1.4"
+  },
+  "description": "Vue3 Flickr Gallery",
+  "main": "src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katzefudder/FlickrGallery.git"
+  },
+  "keywords": [
+    "flickr",
+    "vue3"
+  ],
+  "author": "Florian Dehn <flo@katzefudder.de>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katzefudder/FlickrGallery/issues"
+  },
+  "homepage": "https://github.com/katzefudder/FlickrGallery#readme"
+}
