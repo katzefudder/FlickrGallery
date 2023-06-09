@@ -1,5 +1,7 @@
 # FlickrGallery
 
+A project that was started to fulfil my own needs with a flickr gallery for my website/portfolio.
+
 ## Usage
 
 main.js
