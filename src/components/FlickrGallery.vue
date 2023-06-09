@@ -36,6 +36,7 @@
 <script>
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
+import '../assets/flickrgallery.css'
 import axios from "axios";
 import Image from "./Image.vue";
 
