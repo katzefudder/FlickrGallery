@@ -15,7 +15,6 @@
       <div class="col-lg-12 navigation">
         <span class="prev">
           <button
-              class="px-4 py-2 text-white bg-red-600 focus:outline-none"
               @click="previousPage"
               @keyup.right="previousPage"
           >
@@ -24,7 +23,6 @@
         </span>
         <span class="next">
           <button
-              class="px-4 py-2 text-white bg-red-600 focus:outline-none"
               @click="nextPage"
               @keyup.right="nextPage"
           >
