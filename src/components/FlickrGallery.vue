@@ -1,24 +1,30 @@
 <template>
   <!-- Gallery begin -->
-  <div id="flickrgallery">
-    <div class="container">
-      <div class="col-md-12">
-        <h3>{{ title ? title : "Selected Photos"}}</h3>
-        <div :id="galleryID">
-          <span v-for="(image) in photos">
-            <Image :image="image"></Image>
-          </span>
+    <div :id="galleryID" >
+      <Transition name="fade">
+        <div v-if="!loading" :style="flickrLoadingStyle" class="flickr-container" ref="flickr-container">
+          <h3>{{ title ? title : "Selected Photos"}}</h3>
+            <div class="flickr-images">
+              <span v-for="(image) in photos">
+                <Image :image="image"></Image>
+              </span>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row" v-if="useNavigation">
-      <div class="col-lg-12 navigation">
+      </Transition>
+      <div v-if="useNavigation" class="flickr-navigation">
         <span class="prev">
           <button
               @click="previousPage"
               @keyup.right="previousPage"
           >
-            Previous Page
+            &lt;&lt;
+          </button>
+        </span>
+        <span v-if="showPage" class="current">
+          <button
+              @click=""
+          >
+            Seite {{page}} ({{perPage}} Fotos)
           </button>
         </span>
         <span class="next">
@@ -26,12 +32,11 @@
               @click="nextPage"
               @keyup.right="nextPage"
           >
-            Next Page
+            &gt;&gt;
           </button>
         </span>
       </div>
     </div>
-  </div>
   <!-- Gallery end -->
 </template>
 
@@ -48,12 +53,13 @@ export default {
   props: {
     title: String,
     useNavigation: Boolean,
+    showPage: Boolean,
     apiKey: String,
     userId: String,
     method: String,
     photosetId: String,
     tags: String,
-    extras: String
+    extras: String,
   },
   data: () => ({
     galleryID: "flickr",
@@ -63,48 +69,18 @@ export default {
     totalPictures: 0,
     totalPages: 0,
     flickrGallery: [],
-
+    flickrLoadingStyle: null,
     loading: false,
     photos: [],
   }),
+  beforeMount() {
+    this.photos = this.loadFlickrPhotos()
+  },
   mounted() {
-    this.photos = this.showFlickrGallery()
-    const options = {
-      gallery: '#' + this.galleryID,
-      children:'a',
-      pswpModule: () => import('photoswipe'),
-    };
-    if (!this.lightbox) {
-      const lightbox = new PhotoSwipeLightbox(options);
-      lightbox.on('uiRegister', function() {
-        lightbox.pswp.ui.registerElement({
-          name: 'custom-caption',
-          order: 9,
-          isButton: false,
-          appendTo: 'root',
-          html: 'Caption text',
-          onInit: (el) => {
-            lightbox.pswp.on('change', () => {
-              const currSlideElement = lightbox.pswp.currSlide.data.element;
-              let captionHTML = '';
-              if (currSlideElement) {
-                const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
-                if (hiddenCaption) {
-                  // get caption from element with class hidden-caption-content
-                  captionHTML = hiddenCaption.innerHTML;
-                } else {
-                  // get caption from alt attribute
-                  captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
-                }
-              }
-              el.innerHTML = captionHTML || '';
-            });
-          }
-        });
-      });
-      lightbox.init();
-      this.lightbox = lightbox
-    }
+    this.initLightbox()
+  },
+  watch: {
+
   },
   unmounted() {
     if (this.lightbox) {
@@ -113,7 +89,46 @@ export default {
     }
   },
   methods: {
-    async showFlickrGallery(page) {
+    initLightbox(){
+      const options = {
+        gallery: '#' + this.galleryID,
+        children:'a',
+        pswpModule: () => import('photoswipe'),
+      };
+      if (!this.lightbox) {
+        const lightbox = new PhotoSwipeLightbox(options);
+        lightbox.on('uiRegister', function() {
+          lightbox.pswp.ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            html: 'Caption text',
+            onInit: (el) => {
+              lightbox.pswp.on('change', () => {
+                const currSlideElement = lightbox.pswp.currSlide.data.element;
+                let captionHTML = '';
+                if (currSlideElement) {
+                  const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
+                  if (hiddenCaption) {
+                    // get caption from element with class hidden-caption-content
+                    captionHTML = hiddenCaption.innerHTML;
+                  } else {
+                    // get caption from alt attribute
+                    captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
+                  }
+                }
+                el.innerHTML = captionHTML || '';
+              });
+            }
+          });
+        });
+        lightbox.init();
+        this.lightbox = lightbox
+      }
+    },
+    async loadFlickrPhotos(page) {
+      this.loading = true;
       const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.extras + "&nojsoncallback=1"
       const data = {};
       await axios.get(url, data, {
@@ -150,20 +165,20 @@ export default {
             }
           })
         }
-
         this.photos = photos
       });
+      this.loading = false;
     },
     nextPage() {
       if (this.page < this.totalPages) {
         this.page++
-        this.showFlickrGallery()
+        this.loadFlickrPhotos()
       }
     },
     previousPage() {
       if (this.page > 1) {
         this.page--
-        this.showFlickrGallery()
+        this.loadFlickrPhotos()
       }
     },
   },

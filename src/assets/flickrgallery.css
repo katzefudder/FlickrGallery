@@ -30,6 +30,21 @@
   margin: auto;
 }
 
+#flickr img {
+  width: 180px;
+  margin: 5px 30px 10px 0px;
+  box-shadow: 4px 8px 12px silver;
+}
+.img-default-size {
+  width: 180px;
+  transition: all 0.2s;
+}
+
+.img-enlarged-size {
+  width: 200px;
+  transition: all 0.2s;
+}
+
 @media only screen and (max-width: 600px) {
   #flickr a {
     display: table;
@@ -62,6 +77,15 @@
   #flickr img {
     width: 180px;
     margin: 5px 30px 10px 0px;
+  }
+  .img-default-size {
+    width: 180px;
+    transition: all 0.2s;
+  }
+
+  .img-enlarged-size {
+    width: 200px;
+    transition: all 0.2s;
   }
 }
 
@@ -110,10 +134,10 @@
 
 /* Next & previous buttons */
 .prev,
-.next {
+.next,
+.current {
   cursor: pointer;
   position: absolute;
-  top: 50%;
   width: auto;
   padding: 16px;
   margin-top: -50px;
@@ -126,6 +150,10 @@
   -webkit-user-select: none;
 }
 
+.current {
+  right: 50%;
+}
+
 /* Position the "next button" to the right */
 .next {
   right: 0;
@@ -136,4 +164,39 @@
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.flickr-container {
+  max-width: 1320px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+  margin-bottom: 40px;
+}
+.flickr-images {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 0em auto;
+}
+
+.flickr-navigation {
+  margin-top: 40px;
+  padding-top: 40px;
+  margin-bottom: 80px;
+}
+
+.flickr-navigation button {
+  font-family: Arial sans-serif;
+  font-size: 1.2rem;
+  border: 1px solid #000000;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
