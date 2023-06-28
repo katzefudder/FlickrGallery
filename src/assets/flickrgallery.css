@@ -158,7 +158,7 @@
   .flickr-images img {
     width: auto;
     margin-bottom: 10px;
-    max-width: 400px;
+    max-width: 350px;
   }
   .img-default-size, .img-enlarged-size {
     transition: none;
