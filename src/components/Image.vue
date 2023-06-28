@@ -10,7 +10,7 @@
       rel="noreferrer"
   >
     <span class="hidden-caption-content">{{image.alt}}</span>
-    <img class="zoom"
+    <img
          :src="image.thumbnailURL"
          alt=""
          @mouseover="enlargeImage"

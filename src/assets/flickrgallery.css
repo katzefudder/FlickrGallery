@@ -21,72 +21,9 @@
 }
 
 /* ******* FLICKR ******* */
-.zoom:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-
 #flickr a {
   display: inline;
   margin: auto;
-}
-
-#flickr img {
-  width: 180px;
-  margin: 5px 30px 10px 0px;
-  box-shadow: 4px 8px 12px silver;
-}
-.img-default-size {
-  width: 180px;
-  transition: all 0.2s;
-}
-
-.img-enlarged-size {
-  width: 200px;
-  transition: all 0.2s;
-}
-
-@media only screen and (max-width: 600px) {
-  #flickr a {
-    display: table;
-    margin: auto;
-  }
-  #flickr img {
-    width: auto;
-    max-width: 300px;
-    margin: 5px 30px 10px 0;
-  }
-  .intro {
-    background-position: 70%;
-  }
-  header .intro-text {
-    padding-top: 10px;
-    padding-bottom: 340px;
-  }
-  .intro-text h1 {
-    font-size: 36px;
-  }
-  .intro-text h2 {
-    font-size: 28px;
-  }
-  .intro-text h3 {
-    font-size: 24px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #flickr img {
-    width: 180px;
-    margin: 5px 30px 10px 0px;
-  }
-  .img-default-size {
-    width: 180px;
-    transition: all 0.2s;
-  }
-
-  .img-enlarged-size {
-    width: 200px;
-    transition: all 0.2s;
-  }
 }
 
 .flickr-l {
@@ -167,16 +104,28 @@
 }
 
 .flickr-container {
-  max-width: 1320px;
-  margin-right: auto;
-  margin-left: auto;
-  position: relative;
-  margin-bottom: 40px;
-}
-.flickr-images {
-  flex: 0 0 auto;
-  width: 100%;
+  width: 1200px;
   margin: 0em auto;
+}
+
+.flickr-images {
+  width: 100%;
+}
+
+.flickr-images img {
+  display: inline;
+  margin: 5px;
+  border: 2px solid #ffffff;
+}
+
+.img-default-size {
+  width: 180px;
+  transition: all 0.2s;
+}
+
+.img-enlarged-size {
+  transform: scale(1.4);
+  transition: all 0.2s;
 }
 
 .flickr-navigation {
@@ -193,10 +142,57 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 1.0s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .flickr-container {
+    max-width: 350px;
+    margin: 0em auto;
+  }
+  .flickr-images img {
+    width: auto;
+    margin: 0;
+  }
+  .img-default-size, .img-enlarged-size {
+    transition: none;
+    transform: none;
+    width: auto;
+  }
+  .zoom:hover {
+    transform: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .flickr-container {
+    max-width: 400px;
+    margin: 0em auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .flickr-container {
+    max-width: 400px;
+    margin: 0em auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .flickr-container {
+    max-width: 992px;
+    margin: 0em auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .flickr-container {
+    max-width: 1200px;
+    margin: 0em auto;
+  }
 }
