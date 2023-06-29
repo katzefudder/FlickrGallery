@@ -20,11 +20,11 @@
             &lt;&lt;
           </button>
         </span>
-        <span v-if="showPage" class="current">
+        <span class="current">
           <button
               @click=""
           >
-            Seite {{page}} ({{perPage}} Fotos)
+            Seite {{page}}/{{totalPages}}
           </button>
         </span>
         <span class="next">
