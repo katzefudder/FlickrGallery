@@ -2,6 +2,7 @@
   "name": "flickrgallery",
   "private": false,
   "version": "0.1.8",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -17,10 +18,10 @@
       "require": "./dist/style.css"
     }
   },
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:docs": "vite build --config vite-docs.config.js",
     "preview": "vite preview"
   },
   "dependencies": {
