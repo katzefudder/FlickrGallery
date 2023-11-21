@@ -96,7 +96,6 @@ export default {
   },
   methods: {
     initLightbox(){
-      console.log(this.galleryID)
       const options = {
         gallery: '#' + this.galleryID,
         children:'a',
