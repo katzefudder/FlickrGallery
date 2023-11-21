@@ -1,7 +1,7 @@
 # FlickrGallery
 
 A project that was started to fulfil my own needs with a flickr gallery for my website/portfolio [katzefudder.de](https://www.katzefudder.de)
-
+See [https://katzefudder.github.io/FlickrGallery/](https://katzefudder.github.io/FlickrGallery/) for a demo.
 ## Usage
 
 main.js
