@@ -62,7 +62,7 @@ export default {
     extras: String,
   },
   data: () => ({
-    galleryID: "flickr",
+    galleryID: 1,
     endpoint: "https://www.flickr.com/services/rest/",
     page: 1,
     perPage: 18,
@@ -77,6 +77,7 @@ export default {
     this.photos = this.loadFlickrPhotos()
   },
   mounted() {
+    this.galleryID = "flickr-"+this.$.uid
     this.initLightbox()
   },
   watch: {
