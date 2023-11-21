@@ -3,7 +3,7 @@
     <div :id="galleryID" >
       <Transition name="fade">
         <div v-if="!loading" :style="flickrLoadingStyle" class="flickr-container" ref="flickr-container">
-          <h3>{{ title ? title : "Selected Photos"}}</h3>
+          <h2>{{ title ? title : "Selected Photos"}}</h2>
             <div class="flickr-images">
               <span v-for="(image) in photos">
                 <Image :image="image"></Image>
@@ -51,6 +51,7 @@ export default {
   name: 'FlickrGallery',
   components: {Image},
   props: {
+    galleryContainer: "flickr",
     title: String,
     useNavigation: Boolean,
     showPage: Boolean,
@@ -75,6 +76,11 @@ export default {
   }),
   beforeMount() {
     this.photos = this.loadFlickrPhotos()
+    if (this.galleryContainer != null) {
+      this.galleryID = this.galleryContainer
+    } else {
+      this.galleryID = this.galleryID+"-"+this.$.uid
+    }
   },
   mounted() {
     this.initLightbox()
@@ -90,6 +96,7 @@ export default {
   },
   methods: {
     initLightbox(){
+      console.log(this.galleryID)
       const options = {
         gallery: '#' + this.galleryID,
         children:'a',
