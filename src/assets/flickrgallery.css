@@ -116,6 +116,9 @@
   display: inline;
   margin: 5px;
   border: 2px solid #ffffff;
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
 }
 
 .img-default-size {
