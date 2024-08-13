@@ -112,7 +112,7 @@
   width: 100%;
 }
 
-.flickr-images img {
+.flickr-images img, img.pswp__img {
   display: inline;
   margin: 5px;
   border: 2px solid #ffffff;

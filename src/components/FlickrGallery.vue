@@ -24,7 +24,7 @@
           <button
               @click=""
           >
-            Seite {{page}}/{{totalPages}}
+            Page {{page}}/{{totalPages}}
           </button>
         </span>
         <span class="next">
@@ -129,11 +129,10 @@ export default {
             }
           });
         });
-        lightbox.init();
-        this.lightbox = lightbox
+        this.lightbox = lightbox.init();
       }
     },
-    async loadFlickrPhotos(page) {
+    async loadFlickrPhotos() {
       this.loading = true;
       const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.extras + "&nojsoncallback=1"
       const data = {};
