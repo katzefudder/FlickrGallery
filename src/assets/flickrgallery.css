@@ -1,6 +1,6 @@
 .pswp__custom-caption {
   background: rgba(162, 164, 162, 0.75);
-  font-size: 16px;
+  font-size: 0.9em;
   color: #fff;
   width: calc(100% - 32px);
   max-width: 400px;
@@ -112,7 +112,15 @@
   width: 100%;
 }
 
-.flickr-images img, img.pswp__img {
+img.pswp__img {
+  border: 2px solid #ffffff;
+  /*border-width: 24px 24px 72px 24px;*/
+  -webkit-box-shadow: 4px 4px 45px 0px rgba(0,0,0,0.95);
+  -moz-box-shadow: 4px 4px 45px 0px rgba(0,0,0,0.95);
+  box-shadow: 4px 4px 45px 0px rgba(0,0,0,0.95);
+}
+
+.flickr-images img {
   display: inline;
   margin: 5px;
   border: 2px solid #ffffff;
