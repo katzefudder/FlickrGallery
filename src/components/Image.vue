@@ -1,7 +1,6 @@
 <template>
   <!-- Image begin -->
   <a
-      :key="key"
       :href="image.largeURL"
       :data-pswp-width="image.width"
       :data-pswp-height="image.height"
@@ -28,7 +27,6 @@
 export default {
   name: "Image",
   props: {
-    key: String,
     image: Object
   },
   data() {
