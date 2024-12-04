@@ -69,12 +69,16 @@ export default {
     perPage: 18,
     totalPictures: 0,
     totalPages: 0,
+    defaultExtras: 'url_m,url_l,owner_name,description', // https://www.flickr.com/services/api/flickr.photos.search.html
     flickrGallery: [],
     flickrLoadingStyle: null,
     loading: false,
     photos: [],
   }),
   beforeMount() {
+    if (this.extras != null) {
+      this.defaultExtras = this.extras
+    }
     this.photos = this.loadFlickrPhotos()
     if (this.galleryContainer != null) {
       this.galleryID = this.galleryContainer
@@ -98,7 +102,7 @@ export default {
     initLightbox(){
       const options = {
         gallery: '#' + this.galleryID,
-        children:'a',
+        children:'.pswp-gallery__item',
         pswpModule: () => import('photoswipe'),
       };
       if (!this.lightbox) {
@@ -120,6 +124,7 @@ export default {
                     // get caption from element with class hidden-caption-content
                     captionHTML = hiddenCaption.innerHTML;
                   } else {
+                    console.debug(currSlideElement)
                     // get caption from alt attribute
                     captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
                   }
@@ -134,7 +139,7 @@ export default {
     },
     async loadFlickrPhotos() {
       this.loading = true;
-      const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.extras + "&nojsoncallback=1"
+      const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
       const data = {};
       await axios.get(url, data, {
         headers: {
@@ -153,7 +158,8 @@ export default {
               "title": current.title,
               "alt": current.title,
               "width": current.width_l,
-              "height": current.height_l
+              "height": current.height_l,
+              "description": current.description._content
             }
           })
         } else if (this.method == "flickr.photos.search") {
@@ -166,7 +172,8 @@ export default {
               "title": current.title,
               "alt": current.title,
               "width": current.width_l,
-              "height": current.height_l
+              "height": current.height_l,
+              "description": current.description._content
             }
           })
         }

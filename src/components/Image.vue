@@ -1,17 +1,17 @@
 <template>
   <!-- Image begin -->
   <a
+      class="pswp-gallery__item"
       :href="image.largeURL"
       :data-pswp-width="image.width"
       :data-pswp-height="image.height"
-      :alt="image.alt"
       target="_blank"
       rel="noreferrer"
   >
-    <span class="hidden-caption-content">{{image.alt}}</span>
+    <span class="hidden-caption-content" v-html="imageDescription"></span>
     <img
          :src="image.thumbnailURL"
-         alt=""
+         :alt="image.description"
          @mouseover="enlargeImage"
          @mouseout="shrinkImage"
          :class="{
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       imageEnlarged: false,
+      imageDescription: "<b>" + this.image.title + "</b><br> " + this.image.description
     };
   },
   methods: {
