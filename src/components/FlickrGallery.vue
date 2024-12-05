@@ -3,7 +3,7 @@
     <div :id="galleryID" >
       <Transition name="fade">
         <div v-if="!loading" :style="flickrLoadingStyle" class="flickr-container" ref="flickr-container">
-          <h2>{{ title ? title : "Selected Photos"}}</h2>
+          <h2 v-if="title">{{ title }}</h2>
             <div class="flickr-images">
               <span v-for="(image) in photos">
                 <Image :image="image"></Image>
