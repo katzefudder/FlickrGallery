@@ -44,7 +44,7 @@
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 import '../assets/flickrgallery.css'
-import axios from "axios";
+import { useFlickrStore } from '../stores/flickr';
 import Image from "./Image.vue";
 
 export default {
@@ -138,48 +138,14 @@ export default {
       }
     },
     async loadFlickrPhotos() {
+      const flickrStore = useFlickrStore();
       this.loading = true;
       const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
-      const data = {};
-      await axios.get(url, data, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }).then(({data}) => {
-        let photos = []
-        if (this.method == "flickr.photosets.getPhotos") {
-          this.totalPictures = data.photoset.total
-          this.totalPages = data.photoset.pages
-          data.photoset.photo.forEach(function (current, index) {
-            photos[index] = {
-              "largeURL": current.url_l,
-              "thumbnailURL": current.url_m,
-              "title": current.title,
-              "alt": current.title,
-              "width": current.width_l,
-              "height": current.height_l,
-              "description": current.description._content
-            }
-          })
-        } else if (this.method == "flickr.photos.search") {
-          this.totalPictures = data.photos.total
-          this.totalPages = data.photos.pages
-          data.photos.photo.forEach(function (current, index) {
-            photos[index] = {
-              "largeURL": current.url_l,
-              "thumbnailURL": current.url_m,
-              "title": current.title,
-              "alt": current.title,
-              "width": current.width_l,
-              "height": current.height_l,
-              "description": current.description._content
-            }
-          })
-        }
-        this.photos = photos
-      });
-      this.loading = false;
+      await flickrStore.fetchPhotos(url, this.page);
+      this.photos = flickrStore.photos;
+      this.totalPages = flickrStore.totalPages;
+      this.totalPictures = flickrStore.totalPictures;
+      this.loading = flickrStore.loading;
     },
     nextPage() {
       if (this.page < this.totalPages) {

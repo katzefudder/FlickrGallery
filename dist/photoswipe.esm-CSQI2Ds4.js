@@ -1,6 +1,6 @@
 /*!
-  * PhotoSwipe 5.4.3 - https://photoswipe.com
-  * (c) 2023 Dmytro Semenov
+  * PhotoSwipe 5.4.4 - https://photoswipe.com
+  * (c) 2024 Dmytro Semenov
   */
 function f(r, t, i) {
   const e = document.createElement(t);
@@ -232,7 +232,7 @@ class Y {
   }
 }
 const T = 4e3;
-class k {
+class H {
   /**
    * @param {PhotoSwipeOptions} options PhotoSwipe options
    * @param {SlideData} itemData Slide data
@@ -325,7 +325,7 @@ class j {
     }, this.pan = {
       x: 0,
       y: 0
-    }, this.isFirstSlide = this.isActive && !e.opener.isOpen, this.zoomLevels = new k(e.options, t, i, e), this.pswp.dispatch("gettingData", {
+    }, this.isFirstSlide = this.isActive && !e.opener.isOpen, this.zoomLevels = new H(e.options, t, i, e), this.pswp.dispatch("gettingData", {
       slide: this,
       data: this.data,
       index: i
@@ -819,8 +819,7 @@ class nt {
         }).defaultPrevented || n.applyBgOpacity(c);
       } else
         l = a - (a - l) * st;
-    else
-      l > h && (l = h + (l - h) * et);
+    else l > h && (l = h + (l - h) * et);
     o.pan.x = this._calculatePanForZoomLevel("x", l), o.pan.y = this._calculatePanForZoomLevel("y", l), o.setZoomLevel(l), o.applyCurrentZoomPan();
   }
   end() {
@@ -1379,7 +1378,10 @@ class dt {
       return;
     this._prevPositionIndex = this._currPositionIndex, i.currIndex = i.potentialIndex;
     let s = Math.abs(e), n;
-    s >= 3 && (this._containerShiftIndex += e + (e > 0 ? -3 : 3), s = 3);
+    s >= 3 && (this._containerShiftIndex += e + (e > 0 ? -3 : 3), s = 3, this.itemHolders.forEach((o) => {
+      var a;
+      (a = o.slide) === null || a === void 0 || a.destroy(), o.slide = void 0;
+    }));
     for (let o = 0; o < s; o++)
       e > 0 ? (n = this.itemHolders.shift(), n && (this.itemHolders[2] = n, this._containerShiftIndex++, y(n.el, (this._containerShiftIndex + 2) * this.slideWidth), i.setContent(n, i.currIndex - s + o + 2))) : (n = this.itemHolders.pop(), n && (this.itemHolders.unshift(n), this._containerShiftIndex--, y(n.el, this._containerShiftIndex * this.slideWidth), i.setContent(n, i.currIndex + s - o - 2)));
     Math.abs(this._containerShiftIndex) > 50 && !this.isShifted() && (this.resetPosition(), this.resize()), i.animations.stopAllPan(), this.itemHolders.forEach((o, a) => {
@@ -1786,7 +1788,7 @@ class xt {
     l === "bar" ? (t.topBar || (t.topBar = f("pswp__top-bar pswp__hide-on-close", "div", t.scrollWrap)), c = t.topBar) : (h.classList.add("pswp__hide-on-close"), l === "wrapper" && (c = t.scrollWrap)), (e = c) === null || e === void 0 || e.appendChild(t.applyFilters("uiElement", h, i));
   }
 }
-function H(r, t, i) {
+function k(r, t, i) {
   r.classList.add("pswp__button--arrow"), r.setAttribute("aria-controls", "pswp__items"), t.on("change", () => {
     t.options.loop || (i ? r.disabled = !(t.currIndex < t.getNumItems() - 1) : r.disabled = !(t.currIndex > 0));
   });
@@ -1805,7 +1807,7 @@ const bt = {
     outlineID: "pswp__icn-arrow"
   },
   onClick: "prev",
-  onInit: H
+  onInit: k
 }, It = {
   name: "arrowNext",
   className: "pswp__button--arrow--next",
@@ -1821,7 +1823,7 @@ const bt = {
   },
   onClick: "next",
   onInit: (r, t) => {
-    H(r, t, !0);
+    k(r, t, !0);
   }
 }, At = {
   name: "close",
@@ -2352,7 +2354,7 @@ function W(r, t, i) {
     options: n
   } = t;
   if (n) {
-    s = new k(n, r, -1);
+    s = new H(n, r, -1);
     let o;
     t.pswp ? o = t.pswp.viewportSize : o = B(n, t);
     const a = N(n, o, r, i);
@@ -2368,7 +2370,7 @@ function Nt(r, t) {
   }).defaultPrevented)
     return W(i, t, r);
 }
-class kt {
+class Ht {
   /**
    * @param {PhotoSwipe} pswp
    */
@@ -2440,7 +2442,7 @@ class kt {
     this._cachedItems.forEach((t) => t.destroy()), this._cachedItems = [];
   }
 }
-class Ht extends Mt {
+class kt extends Mt {
   /**
    * Get total number of slides
    *
@@ -2640,8 +2642,7 @@ class Wt {
    * @param {boolean} [animate]
    */
   _setClosedStateZoomPan(t) {
-    if (!this._thumbBounds)
-      return;
+    if (!this._thumbBounds) return;
     const {
       pswp: i
     } = this, {
@@ -2707,7 +2708,7 @@ const Vt = {
   preload: [1, 2],
   easing: "cubic-bezier(.4,0,.22,1)"
 };
-class $t extends Ht {
+class $t extends kt {
   /**
    * @param {PhotoSwipeOptions} [options]
    */
@@ -2721,7 +2722,7 @@ class $t extends Ht {
     }, this.viewportSize = {
       x: 0,
       y: 0
-    }, this.bgOpacity = 1, this.currIndex = 0, this.potentialIndex = 0, this.isOpen = !1, this.isDestroying = !1, this.hasMouse = !1, this._initialItemData = {}, this._initialThumbBounds = void 0, this.topBar = void 0, this.element = void 0, this.template = void 0, this.container = void 0, this.scrollWrap = void 0, this.currSlide = void 0, this.events = new X(), this.animations = new wt(), this.mainScroll = new dt(this), this.gestures = new lt(this), this.opener = new Wt(this), this.keyboard = new ut(this), this.contentLoader = new kt(this);
+    }, this.bgOpacity = 1, this.currIndex = 0, this.potentialIndex = 0, this.isOpen = !1, this.isDestroying = !1, this.hasMouse = !1, this._initialItemData = {}, this._initialThumbBounds = void 0, this.topBar = void 0, this.element = void 0, this.template = void 0, this.container = void 0, this.scrollWrap = void 0, this.currSlide = void 0, this.events = new X(), this.animations = new wt(), this.mainScroll = new dt(this), this.gestures = new lt(this), this.opener = new Wt(this), this.keyboard = new ut(this), this.contentLoader = new Ht(this);
   }
   /** @returns {boolean} */
   init() {

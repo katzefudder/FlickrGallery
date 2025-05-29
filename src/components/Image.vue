@@ -2,16 +2,16 @@
   <!-- Image begin -->
   <a
       class="pswp-gallery__item"
-      :href="image.largeURL"
-      :data-pswp-width="image.width"
-      :data-pswp-height="image.height"
+      :href="image.url_l || image.url_m"
+      :data-pswp-width="image.width_l || image.width_m"
+      :data-pswp-height="image.height_l || image.height_m"
       target="_blank"
       rel="noreferrer"
   >
     <span class="hidden-caption-content" v-html="imageDescription"></span>
     <img
-         :src="image.thumbnailURL"
-         :alt="image.description"
+         :src="image.url_m"
+         :alt="image.title"
          @mouseover="enlargeImage"
          @mouseout="shrinkImage"
          :class="{
@@ -27,13 +27,25 @@
 export default {
   name: "Image",
   props: {
-    image: Object
+    image: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return {
       imageEnlarged: false,
-      imageDescription: "<b>" + this.image.title + "</b><br> " + this.image.description
+      imageDescription: `<b>${this.image.title}</b><br>${this.image.description? (this.image.description._content || this.image.description) : ''}`
     };
+  },
+  watch: {
+    image: {
+      handler(newVal) {
+        this.imageDescription = `<b>${newVal.title}</b><br>${newVal.description? (newVal.description._content || newVal.description) : ''}`;
+      },
+      immediate: true,
+      deep: true
+    }
   },
   methods: {
     enlargeImage() {
