@@ -1,10 +1,10 @@
 import { defineAsyncComponent as n } from "vue";
-const e = (o) => {
-  o.component(
+const l = (o, e) => {
+  o.use(e), o.component(
     "FlickrGallery",
-    n(() => import("./FlickrGallery-6_Ro5oAQ.js"))
+    n(() => import("./FlickrGallery-v4skOySa.js"))
   );
 };
 export {
-  e as FlickrGalleryPlugin
+  l as FlickrGalleryPlugin
 };

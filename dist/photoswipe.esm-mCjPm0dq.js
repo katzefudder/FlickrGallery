@@ -9,7 +9,7 @@ function f(r, t, i) {
 function p(r, t) {
   return r.x = t.x, r.y = t.y, t.id !== void 0 && (r.id = t.id), r;
 }
-function M(r) {
+function Z(r) {
   r.x = Math.round(r.x), r.y = Math.round(r.y);
 }
 function A(r, t) {
@@ -19,27 +19,27 @@ function A(r, t) {
 function x(r, t) {
   return r.x === t.x && r.y === t.y;
 }
-function I(r, t, i) {
+function b(r, t, i) {
   return Math.min(Math.max(r, t), i);
 }
-function b(r, t, i) {
+function I(r, t, i) {
   let e = `translate3d(${r}px,${t || 0}px,0)`;
   return i !== void 0 && (e += ` scale3d(${i},${i},1)`), e;
 }
 function y(r, t, i, e) {
-  r.style.transform = b(t, i, e);
+  r.style.transform = I(t, i, e);
 }
-const $ = "cubic-bezier(.4,0,.22,1)";
-function R(r, t, i, e) {
-  r.style.transition = t ? `${t} ${i}ms ${e || $}` : "none";
+const W = "cubic-bezier(.4,0,.22,1)";
+function D(r, t, i, e) {
+  r.style.transition = t ? `${t} ${i}ms ${e || W}` : "none";
 }
 function L(r, t, i) {
   r.style.width = typeof t == "number" ? `${t}px` : t, r.style.height = typeof i == "number" ? `${i}px` : i;
 }
-function U(r) {
-  R(r);
+function V(r) {
+  D(r);
 }
-function q(r) {
+function $(r) {
   return "decode" in r ? r.decode().catch(() => {
   }) : r.complete ? Promise.resolve(r) : new Promise((t, i) => {
     r.onload = () => t(r), r.onerror = i;
@@ -51,10 +51,10 @@ const _ = {
   LOADED: "loaded",
   ERROR: "error"
 };
-function G(r) {
+function U(r) {
   return "button" in r && r.button === 1 || r.ctrlKey || r.metaKey || r.altKey || r.shiftKey;
 }
-function K(r, t, i = document) {
+function q(r, t, i = document) {
   let e = [];
   if (r instanceof Element)
     e = [r];
@@ -69,16 +69,16 @@ function K(r, t, i = document) {
 function C() {
   return !!(navigator.vendor && navigator.vendor.match(/apple/i));
 }
-let F = !1;
+let M = !1;
 try {
   window.addEventListener("test", null, Object.defineProperty({}, "passive", {
     get: () => {
-      F = !0;
+      M = !0;
     }
   }));
 } catch {
 }
-class X {
+class G {
   constructor() {
     this._pool = [];
   }
@@ -135,7 +135,7 @@ class X {
           listener: e,
           passive: s
         }));
-        const c = F ? {
+        const c = M ? {
           passive: s || !1
         } : !1;
         t[a](l, e, c);
@@ -143,7 +143,7 @@ class X {
     });
   }
 }
-function B(r, t) {
+function R(r, t) {
   if (r.getViewportSizeFn) {
     const i = r.getViewportSizeFn(r, t);
     if (i)
@@ -170,13 +170,13 @@ function S(r, t, i, e, s) {
   }
   return Number(n) || 0;
 }
-function N(r, t, i, e) {
+function F(r, t, i, e) {
   return {
     x: t.x - S("left", r, t, i, e) - S("right", r, t, i, e),
     y: t.y - S("top", r, t, i, e) - S("bottom", r, t, i, e)
   };
 }
-class Y {
+class K {
   /**
    * @param {Slide} slide
    */
@@ -228,11 +228,11 @@ class Y {
    * @returns {number}
    */
   correctPan(t, i) {
-    return I(i, this.max[t], this.min[t]);
+    return b(i, this.max[t], this.min[t]);
   }
 }
 const T = 4e3;
-class H {
+class B {
   /**
    * @param {PhotoSwipeOptions} options PhotoSwipe options
    * @param {SlideData} itemData Slide data
@@ -312,7 +312,7 @@ class H {
     return this._parseZoomLevelOption("max") || Math.max(1, this.fit * 4);
   }
 }
-class j {
+class X {
   /**
    * @param {SlideData} data
    * @param {number} index
@@ -325,11 +325,11 @@ class j {
     }, this.pan = {
       x: 0,
       y: 0
-    }, this.isFirstSlide = this.isActive && !e.opener.isOpen, this.zoomLevels = new H(e.options, t, i, e), this.pswp.dispatch("gettingData", {
+    }, this.isFirstSlide = this.isActive && !e.opener.isOpen, this.zoomLevels = new B(e.options, t, i, e), this.pswp.dispatch("gettingData", {
       slide: this,
       data: this.data,
       index: i
-    }), this.content = this.pswp.contentLoader.getContentBySlide(this), this.container = f("pswp__zoom-wrap", "div"), this.holderElement = null, this.currZoomLevel = 1, this.width = this.content.width, this.height = this.content.height, this.heavyAppended = !1, this.bounds = new Y(this), this.prevDisplayedWidth = -1, this.prevDisplayedHeight = -1, this.pswp.dispatch("slideInit", {
+    }), this.content = this.pswp.contentLoader.getContentBySlide(this), this.container = f("pswp__zoom-wrap", "div"), this.holderElement = null, this.currZoomLevel = 1, this.width = this.content.width, this.height = this.content.height, this.heavyAppended = !1, this.bounds = new K(this), this.prevDisplayedWidth = -1, this.prevDisplayedHeight = -1, this.pswp.dispatch("slideInit", {
       slide: this
     });
   }
@@ -368,7 +368,7 @@ class j {
     const {
       pswp: t
     } = this;
-    this.heavyAppended || !t.opener.isOpen || t.mainScroll.isShifted() || !this.isActive && !!0 || this.pswp.dispatch("appendHeavy", {
+    this.heavyAppended || !t.opener.isOpen || t.mainScroll.isShifted() || !this.isActive && !1 || this.pswp.dispatch("appendHeavy", {
       slide: this
     }).defaultPrevented || (this.heavyAppended = !0, this.content.append(), this.pswp.dispatch("appendHeavyContent", {
       slide: this
@@ -453,7 +453,7 @@ class j {
       transitionDuration: e
     }), n.animations.stopAllPan();
     const o = this.currZoomLevel;
-    s || (t = I(t, this.zoomLevels.min, this.zoomLevels.max)), this.setZoomLevel(t), this.pan.x = this.calculateZoomToPanOffset("x", i, o), this.pan.y = this.calculateZoomToPanOffset("y", i, o), M(this.pan);
+    s || (t = b(t, this.zoomLevels.min, this.zoomLevels.max)), this.setZoomLevel(t), this.pan.x = this.calculateZoomToPanOffset("x", i, o), this.pan.y = this.calculateZoomToPanOffset("y", i, o), Z(this.pan);
     const a = () => {
       this._setResolution(t), this.applyCurrentZoomPan();
     };
@@ -554,14 +554,14 @@ class j {
     const {
       pswp: t
     } = this;
-    p(this.panAreaSize, N(t.options, t.viewportSize, this.data, this.index)), this.zoomLevels.update(this.width, this.height, this.panAreaSize), t.dispatch("calcSlideSize", {
+    p(this.panAreaSize, F(t.options, t.viewportSize, this.data, this.index)), this.zoomLevels.update(this.width, this.height, this.panAreaSize), t.dispatch("calcSlideSize", {
       slide: this
     });
   }
   /** @returns {string} */
   getCurrentTransform() {
     const t = this.currZoomLevel / (this.currentResolution || this.zoomLevels.initial);
-    return b(this.pan.x, this.pan.y, t);
+    return I(this.pan.x, this.pan.y, t);
   }
   /**
    * Set resolution and re-render the image.
@@ -582,7 +582,7 @@ class j {
     t !== this.currentResolution && (this.currentResolution = t, this.updateContentSize(), this.pswp.dispatch("resolutionChanged"));
   }
 }
-const Q = 0.35, J = 0.6, z = 0.4, E = 0.5;
+const Y = 0.35, j = 0.6, Q = 0.4, J = 0.5;
 function tt(r, t) {
   return r * t / (1 - t);
 }
@@ -612,12 +612,12 @@ class it {
       if (!this.pswp.dispatch("verticalDrag", {
         panY: n
       }).defaultPrevented) {
-        this._setPanWithFriction("y", n, J);
+        this._setPanWithFriction("y", n, j);
         const o = 1 - Math.abs(this._getVerticalDragRatio(s.pan.y));
         this.pswp.applyBgOpacity(o), s.applyCurrentZoomPan();
       }
     } else
-      this._panOrMoveMainScroll("x") || (this._panOrMoveMainScroll("y"), s && (M(s.pan), s.applyCurrentZoomPan()));
+      this._panOrMoveMainScroll("x") || (this._panOrMoveMainScroll("y"), s && (Z(s.pan), s.applyCurrentZoomPan()));
   }
   end() {
     const {
@@ -629,7 +629,7 @@ class it {
     let s = 0;
     if (this.pswp.animations.stopAll(), i.isShifted()) {
       const o = (i.x - i.getCurrSlideX()) / this.pswp.viewportSize.x;
-      t.x < -E && o < 0 || t.x < 0.1 && o < -0.5 ? (s = 1, t.x = Math.min(t.x, 0)) : (t.x > E && o > 0 || t.x > -0.1 && o > 0.5) && (s = -1, t.x = Math.max(t.x, 0)), i.moveIndexBy(s, !0, t.x);
+      t.x < -0.5 && o < 0 || t.x < 0.1 && o < -0.5 ? (s = 1, t.x = Math.min(t.x, 0)) : (t.x > J && o > 0 || t.x > -0.1 && o > 0.5) && (s = -1, t.x = Math.max(t.x, 0)), i.moveIndexBy(s, !0, t.x);
     }
     e && e.currZoomLevel > e.zoomLevels.max || this.gestures.isMultitouch ? this.gestures.zoomLevels.correctZoomPan(!0) : (this._finishPanGestureForAxis("x"), this._finishPanGestureForAxis("y"));
   }
@@ -651,7 +651,7 @@ class it {
     } = e, o = s[t], a = this.pswp.bgOpacity < 1 && t === "y", l = o + tt(i[t], 0.995);
     if (a) {
       const v = this._getVerticalDragRatio(o), w = this._getVerticalDragRatio(l);
-      if (v < 0 && w < -z || v > 0 && w > z) {
+      if (v < 0 && w < -0.4 || v > 0 && w > Q) {
         this.pswp.close();
         return;
       }
@@ -670,7 +670,7 @@ class it {
       onUpdate: (v) => {
         if (a && this.pswp.bgOpacity < 1) {
           const w = 1 - (c - v) / m;
-          this.pswp.applyBgOpacity(I(u + (1 - u) * w, 0, 1));
+          this.pswp.applyBgOpacity(b(u + (1 - u) * w, 0, 1));
         }
         s[t] = Math.floor(v), e.applyCurrentZoomPan();
       }
@@ -763,13 +763,13 @@ class it {
     } = s;
     if (o.correctPan(t, i) !== i || e) {
       const h = Math.round(i - n[t]);
-      n[t] += h * (e || Q);
+      n[t] += h * (e || Y);
     } else
       n[t] = i;
   }
 }
 const et = 0.05, st = 0.15;
-function O(r, t, i) {
+function z(r, t, i) {
   return r.x = (t.x + i.x) / 2, r.y = (t.y + i.y) / 2, r;
 }
 class nt {
@@ -809,7 +809,7 @@ class nt {
     const a = o.zoomLevels.min, h = o.zoomLevels.max;
     if (!o.isZoomable() || n.mainScroll.isShifted())
       return;
-    O(this._startZoomPoint, i, s), O(this._zoomPoint, t, e);
+    z(this._startZoomPoint, i, s), z(this._zoomPoint, t, e);
     let l = 1 / A(i, s) * A(t, e) * this._startZoomLevel;
     if (l > o.zoomLevels.initial + o.zoomLevels.initial / 15 && (this._wasOverFitZoomLevel = !0), l < a)
       if (n.options.pinchToClose && !this._wasOverFitZoomLevel && this._startZoomLevel <= o.zoomLevels.initial) {
@@ -895,7 +895,7 @@ class nt {
           }
           e.applyCurrentZoomPan();
         }
-        h && i.bgOpacity < 1 && i.applyBgOpacity(I(a + (1 - a) * u, 0, 1));
+        h && i.bgOpacity < 1 && i.applyBgOpacity(b(a + (1 - a) * u, 0, 1));
       },
       onComplete: () => {
         e._setResolution(n), e.applyCurrentZoomPan();
@@ -903,7 +903,7 @@ class nt {
     });
   }
 }
-function Z(r) {
+function E(r) {
   return !!/** @type {HTMLElement} */
   r.target.closest(".pswp__container");
 }
@@ -930,14 +930,14 @@ class ot {
    * @param {PointerEvent} originalEvent
    */
   tap(t, i) {
-    Z(i) && this._doClickOrTapAction("tap", t, i);
+    E(i) && this._doClickOrTapAction("tap", t, i);
   }
   /**
    * @param {Point} point
    * @param {PointerEvent} originalEvent
    */
   doubleTap(t, i) {
-    Z(i) && this._doClickOrTapAction("doubleTap", t, i);
+    E(i) && this._doClickOrTapAction("doubleTap", t, i);
   }
   /**
    * @private
@@ -1456,7 +1456,7 @@ class ut {
     } = this;
     if (i.dispatch("keydown", {
       originalEvent: t
-    }).defaultPrevented || G(t))
+    }).defaultPrevented || U(t))
       return;
     let e, s, n = !1;
     const o = "key" in t;
@@ -1530,7 +1530,7 @@ class ft {
     this.onFinish = o;
     const l = n ? "transform" : "opacity", c = (i = t[l]) !== null && i !== void 0 ? i : "";
     this._target = e, this._onComplete = s, this._finished = !1, this._onTransitionEnd = this._onTransitionEnd.bind(this), this._helperTimeout = setTimeout(() => {
-      R(e, l, a, h), this._helperTimeout = setTimeout(() => {
+      D(e, l, a, h), this._helperTimeout = setTimeout(() => {
         e.addEventListener("transitionend", this._onTransitionEnd, !1), e.addEventListener("transitioncancel", this._onTransitionEnd, !1), this._helperTimeout = setTimeout(() => {
           this._finalizeAnimation();
         }, a + 500), e.style[l] = c;
@@ -1552,7 +1552,7 @@ class ft {
   }
   // Destroy is called automatically onFinish
   destroy() {
-    this._helperTimeout && clearTimeout(this._helperTimeout), U(this._target), this._target.removeEventListener("transitionend", this._onTransitionEnd, !1), this._target.removeEventListener("transitioncancel", this._onTransitionEnd, !1), this._finished || this._finalizeAnimation();
+    this._helperTimeout && clearTimeout(this._helperTimeout), V(this._target), this._target.removeEventListener("transitionend", this._onTransitionEnd, !1), this._target.removeEventListener("transitioncancel", this._onTransitionEnd, !1), this._finished || this._finalizeAnimation();
   }
 }
 const _t = 12, vt = 0.75;
@@ -1788,12 +1788,12 @@ class xt {
     l === "bar" ? (t.topBar || (t.topBar = f("pswp__top-bar pswp__hide-on-close", "div", t.scrollWrap)), c = t.topBar) : (h.classList.add("pswp__hide-on-close"), l === "wrapper" && (c = t.scrollWrap)), (e = c) === null || e === void 0 || e.appendChild(t.applyFilters("uiElement", h, i));
   }
 }
-function k(r, t, i) {
+function N(r, t, i) {
   r.classList.add("pswp__button--arrow"), r.setAttribute("aria-controls", "pswp__items"), t.on("change", () => {
     t.options.loop || (i ? r.disabled = !(t.currIndex < t.getNumItems() - 1) : r.disabled = !(t.currIndex > 0));
   });
 }
-const bt = {
+const It = {
   name: "arrowPrev",
   className: "pswp__button--arrow--prev",
   title: "Previous",
@@ -1807,8 +1807,8 @@ const bt = {
     outlineID: "pswp__icn-arrow"
   },
   onClick: "prev",
-  onInit: k
-}, It = {
+  onInit: N
+}, bt = {
   name: "arrowNext",
   className: "pswp__button--arrow--next",
   title: "Next",
@@ -1823,7 +1823,7 @@ const bt = {
   },
   onClick: "next",
   onInit: (r, t) => {
-    k(r, t, !0);
+    N(r, t, !0);
   }
 }, At = {
   name: "close",
@@ -1888,7 +1888,7 @@ const bt = {
     });
   }
 };
-function D(r, t) {
+function O(r, t) {
   r.classList.toggle("pswp--zoomed-in", t);
 }
 class zt {
@@ -1903,7 +1903,7 @@ class zt {
     const {
       pswp: t
     } = this;
-    this.isRegistered = !1, this.uiElementsData = [At, bt, It, Lt, Ct, Tt], t.dispatch("uiRegister"), this.uiElementsData.sort((i, e) => (i.order || 0) - (e.order || 0)), this.items = [], this.isRegistered = !0, this.uiElementsData.forEach((i) => {
+    this.isRegistered = !1, this.uiElementsData = [At, It, bt, Lt, Ct, Tt], t.dispatch("uiRegister"), this.uiElementsData.sort((i, e) => (i.order || 0) - (e.order || 0)), this.items = [], this.isRegistered = !0, this.uiElementsData.forEach((i) => {
       this.registerElement(i);
     }), t.on("change", () => {
       var i;
@@ -1938,12 +1938,12 @@ class zt {
     this._lastUpdatedZoomLevel = s;
     const n = i.zoomLevels.initial - i.zoomLevels.secondary;
     if (Math.abs(n) < 0.01 || !i.isZoomable()) {
-      D(t, !1), t.classList.remove("pswp--zoom-allowed");
+      O(t, !1), t.classList.remove("pswp--zoom-allowed");
       return;
     }
     t.classList.add("pswp--zoom-allowed");
     const o = s === i.zoomLevels.initial ? i.zoomLevels.secondary : i.zoomLevels.initial;
-    D(t, o <= s), (e.imageClickAction === "zoom" || e.imageClickAction === "zoom-or-close") && t.classList.add("pswp--click-to-zoom");
+    O(t, o <= s), (e.imageClickAction === "zoom" || e.imageClickAction === "zoom-or-close") && t.classList.add("pswp--click-to-zoom");
   }
 }
 function Et(r) {
@@ -2094,7 +2094,7 @@ class Rt {
    * @param {number} height
    */
   setDisplayedSize(t, i) {
-    this.element && (this.element.tagName === "IMG" ? (L(this.element, 250, "auto"), this.element.style.transformOrigin = "0 0", this.element.style.transform = b(0, 0, t / 250)) : L(this.element, t, i));
+    this.element && (this.element.tagName === "IMG" ? (L(this.element, 250, "auto"), this.element.style.transformOrigin = "0 0", this.element.style.transform = I(0, 0, t / 250)) : L(this.element, t, i));
   }
   destroy() {
     var t;
@@ -2347,17 +2347,17 @@ class Ft {
   }
 }
 const Bt = 5;
-function W(r, t, i) {
+function k(r, t, i) {
   const e = t.createContentFromData(r, i);
   let s;
   const {
     options: n
   } = t;
   if (n) {
-    s = new H(n, r, -1);
+    s = new B(n, r, -1);
     let o;
-    t.pswp ? o = t.pswp.viewportSize : o = B(n, t);
-    const a = N(n, o, r, i);
+    t.pswp ? o = t.pswp.viewportSize : o = R(n, t);
+    const a = F(n, o, r, i);
     s.update(e.width, e.height, a);
   }
   return e.lazyLoad(), s && e.setDisplayedSize(Math.ceil(e.width * s.initial), Math.ceil(e.height * s.initial)), e;
@@ -2368,9 +2368,9 @@ function Nt(r, t) {
     index: r,
     itemData: i
   }).defaultPrevented)
-    return W(i, t, r);
+    return k(i, t, r);
 }
-class Ht {
+class kt {
   /**
    * @param {PhotoSwipe} pswp
    */
@@ -2442,7 +2442,7 @@ class Ht {
     this._cachedItems.forEach((t) => t.destroy()), this._cachedItems = [];
   }
 }
-class kt extends Mt {
+class Ht extends Mt {
   /**
    * Get total number of slides
    *
@@ -2499,7 +2499,7 @@ class kt extends Mt {
    */
   _getGalleryDOMElements(t) {
     var i, e;
-    return (i = this.options) !== null && i !== void 0 && i.children || (e = this.options) !== null && e !== void 0 && e.childSelector ? K(this.options.children, this.options.childSelector, t) || [] : [t];
+    return (i = this.options) !== null && i !== void 0 && i.children || (e = this.options) !== null && e !== void 0 && e.childSelector ? q(this.options.children, this.options.childSelector, t) || [] : [t];
   }
   /**
    * Converts DOM element to item data object.
@@ -2533,7 +2533,7 @@ class kt extends Mt {
    * @returns {Content} Image that is being decoded or false.
    */
   lazyLoadData(t, i) {
-    return W(t, this, i);
+    return k(t, this, i);
   }
 }
 const P = 3e-3;
@@ -2590,7 +2590,7 @@ class Wt {
   _start() {
     this.isOpening && this._useAnimation && this._placeholder && this._placeholder.tagName === "IMG" ? new Promise((t) => {
       let i = !1, e = !0;
-      q(
+      $(
         /** @type {HTMLImageElement} */
         this._placeholder
       ).finally(() => {
@@ -2653,7 +2653,7 @@ class Wt {
     } = i;
     if (this._croppedZoom && e && this._cropContainer1 && this._cropContainer2) {
       const o = -n.x + (this._thumbBounds.x - e.x) + e.w, a = -n.y + (this._thumbBounds.y - e.y) + e.h, h = n.x - e.w, l = n.y - e.h;
-      t ? (this._animateTo(this._cropContainer1, "transform", b(o, a)), this._animateTo(this._cropContainer2, "transform", b(h, l))) : (y(this._cropContainer1, o, a), y(this._cropContainer2, h, l));
+      t ? (this._animateTo(this._cropContainer1, "transform", I(o, a)), this._animateTo(this._cropContainer2, "transform", I(h, l))) : (y(this._cropContainer1, o, a), y(this._cropContainer2, h, l));
     }
     s && (p(s.pan, e || this._thumbBounds), s.currZoomLevel = this._thumbBounds.w / s.width, t ? this._animateTo(s.container, "transform", s.getCurrentTransform()) : s.applyCurrentZoomPan());
   }
@@ -2708,7 +2708,7 @@ const Vt = {
   preload: [1, 2],
   easing: "cubic-bezier(.4,0,.22,1)"
 };
-class $t extends kt {
+class $t extends Ht {
   /**
    * @param {PhotoSwipeOptions} [options]
    */
@@ -2722,7 +2722,7 @@ class $t extends kt {
     }, this.viewportSize = {
       x: 0,
       y: 0
-    }, this.bgOpacity = 1, this.currIndex = 0, this.potentialIndex = 0, this.isOpen = !1, this.isDestroying = !1, this.hasMouse = !1, this._initialItemData = {}, this._initialThumbBounds = void 0, this.topBar = void 0, this.element = void 0, this.template = void 0, this.container = void 0, this.scrollWrap = void 0, this.currSlide = void 0, this.events = new X(), this.animations = new wt(), this.mainScroll = new dt(this), this.gestures = new lt(this), this.opener = new Wt(this), this.keyboard = new ut(this), this.contentLoader = new Ht(this);
+    }, this.bgOpacity = 1, this.currIndex = 0, this.potentialIndex = 0, this.isOpen = !1, this.isDestroying = !1, this.hasMouse = !1, this._initialItemData = {}, this._initialThumbBounds = void 0, this.topBar = void 0, this.element = void 0, this.template = void 0, this.container = void 0, this.scrollWrap = void 0, this.currSlide = void 0, this.events = new G(), this.animations = new wt(), this.mainScroll = new dt(this), this.gestures = new lt(this), this.opener = new Wt(this), this.keyboard = new ut(this), this.contentLoader = new kt(this);
   }
   /** @returns {boolean} */
   init() {
@@ -2750,7 +2750,7 @@ class $t extends kt {
    */
   getLoopedIndex(t) {
     const i = this.getNumItems();
-    return this.options.loop && (t > i - 1 && (t -= i), t < 0 && (t += i)), I(t, 0, i - 1);
+    return this.options.loop && (t > i - 1 && (t -= i), t < 0 && (t += i)), b(t, 0, i - 1);
   }
   appendHeavy() {
     this.mainScroll.itemHolders.forEach((t) => {
@@ -2849,7 +2849,7 @@ class $t extends kt {
     if (!this.canLoop() && (i < 0 || i >= this.getNumItems()))
       return;
     const s = this.getItemData(i);
-    t.slide = new j(s, i, this), i === this.currIndex && (this.currSlide = t.slide), t.slide.append(t.el);
+    t.slide = new X(s, i, this), i === this.currIndex && (this.currSlide = t.slide), t.slide.append(t.el);
   }
   /** @returns {Point} */
   getViewportCenterPoint() {
@@ -2867,7 +2867,7 @@ class $t extends kt {
   updateSize(t) {
     if (this.isDestroying)
       return;
-    const i = B(this.options, this);
+    const i = R(this.options, this);
     !t && x(i, this._prevViewportSize) || (p(this._prevViewportSize, i), this.dispatch("beforeResize"), p(this.viewportSize, this._prevViewportSize), this._updatePageScrollOffset(), this.dispatch("viewportSize"), this.mainScroll.resize(this.opener.isOpen), !this.hasMouse && window.matchMedia("(any-hover: hover)").matches && this.mouseDetected(), this.dispatch("resize"));
   }
   /**
