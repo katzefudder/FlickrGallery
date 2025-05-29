@@ -12,13 +12,13 @@ export const useFlickrStore = defineStore('flickr', {
   actions: {
     async fetchPhotos(url, page = 1) {
       if (this.photoCache[page]) {
-        console.log(`Lade Fotos von Cache für Seite ${page}`);
         this.photos = this.photoCache[page].photos;
         this.totalPages = this.photoCache[page].totalPages;
         this.totalPictures = this.photoCache[page].totalPictures;
         // Prüfe, ob Cache-Eintrag abgelaufen ist (TTL: z.B. 5 Minuten)
         const ttl = 30 * 60 * 1000; // 30 Minuten in ms
         const cached = this.photoCache[page];
+        console.debug(`images loaded from cache for page ${page} - cache valid for ${ttl / 1000} seconds, ${Math.ceil((Date.now() - cached.timestamp)/1000)} seconds old`);
         if (Date.now() - (cached.timestamp || 0) < ttl) {
           return;
         }
