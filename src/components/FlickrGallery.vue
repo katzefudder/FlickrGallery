@@ -89,8 +89,6 @@ export default {
   mounted() {
     const flickrStore = useFlickrStore();
     this.initLightbox();
-    // Beispiel: Zugriff auf Store-Daten oder Methoden
-    // flickrStore.fetchPhotos(...);
   },
   watch: {
 

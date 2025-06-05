@@ -1,12 +1,12 @@
-import { defineAsyncComponent as n } from "vue";
-const t = {
-  install(o, l = {}) {
-    o.component(
+import { defineAsyncComponent as i } from "vue";
+const o = {
+  install(e, l = {}) {
+    e._context.provides.pinia || console.warn("FlickrGallery uses Pinia! Please make sure you always call app.use(createPinia()) before using this plugin."), e.component(
       "FlickrGallery",
-      n(() => import("./FlickrGallery-I5I6u5L2.js"))
+      i(() => import("./FlickrGallery-I5I6u5L2.js"))
     );
   }
 };
 export {
-  t as FlickrGallery
+  o as FlickrGallery
 };
