@@ -1,7 +1,7 @@
 {
   "name": "flickrgallery",
   "private": false,
-  "version": "0.4.4",
+  "version": "0.4.5.1",
   "type": "module",
   "files": [
     "dist"
@@ -22,6 +22,7 @@
       "require": "./dist/flickrgallery.css"
     },
     "./flickrgallery.umd.js": {
+      "import": "./dist/flickrgallery.umd.js",
       "require": "./dist/flickrgallery.umd.js"
     }
   },
