@@ -20,6 +20,9 @@
     "./dist/flickrgallery.css": {
       "import": "./dist/flickrgallery.css",
       "require": "./dist/flickrgallery.css"
+    },
+    "./flickrgallery.umd.js": {
+      "require": "./dist/flickrgallery.umd.js"
     }
   },
   "scripts": {

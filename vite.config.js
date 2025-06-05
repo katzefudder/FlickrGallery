@@ -32,6 +32,7 @@ export default defineConfig({
       output: {
         globals: {
           vue: "Vue",
+          exports: 'default'
         },
       },
     },

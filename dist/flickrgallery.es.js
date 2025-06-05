@@ -1,5 +1,5 @@
 import { defineAsyncComponent as n } from "vue";
-const r = {
+const t = {
   install(o, l = {}) {
     o.component(
       "FlickrGallery",
@@ -8,5 +8,5 @@ const r = {
   }
 };
 export {
-  r as FlickrGalleryPlugin
+  t as FlickrGallery
 };

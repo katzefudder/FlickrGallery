@@ -1,11 +1,14 @@
 import { defineAsyncComponent } from "vue";
 
-export const FlickrGalleryPlugin = {
+const FlickrGallery = {
   install(app, options = {}) {
-    // Pinia muss vorher in main.js registriert werden!
     app.component(
       "FlickrGallery",
       defineAsyncComponent(() => import("./components/FlickrGallery.vue"))
     );
   }
+};
+
+export {
+  FlickrGallery
 };
