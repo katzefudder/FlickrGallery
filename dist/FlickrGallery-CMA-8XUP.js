@@ -14,7 +14,7 @@ function us(t, e, n) {
 function De(t, e, n) {
   t.style.width = typeof e == "number" ? `${e}px` : e, t.style.height = typeof n == "number" ? `${n}px` : n;
 }
-const k = {
+const L = {
   IDLE: "idle",
   LOADING: "loading",
   LOADED: "loaded",
@@ -161,7 +161,7 @@ class gs {
    * @param {number} index
    */
   constructor(e, n, s) {
-    this.instance = n, this.data = e, this.index = s, this.element = void 0, this.placeholder = void 0, this.slide = void 0, this.displayedImageWidth = 0, this.displayedImageHeight = 0, this.width = Number(this.data.w) || Number(this.data.width) || 0, this.height = Number(this.data.h) || Number(this.data.height) || 0, this.isAttached = !1, this.hasSlide = !1, this.isDecoding = !1, this.state = k.IDLE, this.data.type ? this.type = this.data.type : this.data.src ? this.type = "image" : this.type = "html", this.instance.dispatch("contentInit", {
+    this.instance = n, this.data = e, this.index = s, this.element = void 0, this.placeholder = void 0, this.slide = void 0, this.displayedImageWidth = 0, this.displayedImageHeight = 0, this.width = Number(this.data.w) || Number(this.data.width) || 0, this.height = Number(this.data.h) || Number(this.data.height) || 0, this.isAttached = !1, this.hasSlide = !1, this.isDecoding = !1, this.state = L.IDLE, this.data.type ? this.type = this.data.type : this.data.src ? this.type = "image" : this.type = "html", this.instance.dispatch("contentInit", {
       content: this
     });
   }
@@ -212,7 +212,7 @@ class gs {
       /** @type HTMLImageElement */
       this.element
     );
-    this.updateSrcsetSizes(), this.data.srcset && (i.srcset = this.data.srcset), i.src = (n = this.data.src) !== null && n !== void 0 ? n : "", i.alt = (s = this.data.alt) !== null && s !== void 0 ? s : "", this.state = k.LOADING, i.complete ? this.onLoaded() : (i.onload = () => {
+    this.updateSrcsetSizes(), this.data.srcset && (i.srcset = this.data.srcset), i.src = (n = this.data.src) !== null && n !== void 0 ? n : "", i.alt = (s = this.data.alt) !== null && s !== void 0 ? s : "", this.state = L.LOADING, i.complete ? this.onLoaded() : (i.onload = () => {
       this.onLoaded();
     }, i.onerror = () => {
       this.onError();
@@ -230,16 +230,16 @@ class gs {
    * Content load success handler
    */
   onLoaded() {
-    this.state = k.LOADED, this.slide && this.element && (this.instance.dispatch("loadComplete", {
+    this.state = L.LOADED, this.slide && this.element && (this.instance.dispatch("loadComplete", {
       slide: this.slide,
       content: this
-    }), this.slide.isActive && this.slide.heavyAppended && !this.element.parentNode && (this.append(), this.slide.updateContentSize(!0)), (this.state === k.LOADED || this.state === k.ERROR) && this.removePlaceholder());
+    }), this.slide.isActive && this.slide.heavyAppended && !this.element.parentNode && (this.append(), this.slide.updateContentSize(!0)), (this.state === L.LOADED || this.state === L.ERROR) && this.removePlaceholder());
   }
   /**
    * Content load error handler
    */
   onError() {
-    this.state = k.ERROR, this.slide && (this.displayError(), this.instance.dispatch("loadComplete", {
+    this.state = L.ERROR, this.slide && (this.displayError(), this.instance.dispatch("loadComplete", {
       slide: this.slide,
       isError: !0,
       content: this
@@ -252,13 +252,13 @@ class gs {
    * @returns {Boolean} If the content is currently loading
    */
   isLoading() {
-    return this.instance.applyFilters("isContentLoading", this.state === k.LOADING, this);
+    return this.instance.applyFilters("isContentLoading", this.state === L.LOADING, this);
   }
   /**
    * @returns {Boolean} If the content is in error state
    */
   isError() {
-    return this.state === k.ERROR;
+    return this.state === L.ERROR;
   }
   /**
    * @returns {boolean} If the content is image
@@ -291,7 +291,7 @@ class gs {
    * @returns {boolean} If the content can be zoomed
    */
   isZoomable() {
-    return this.instance.applyFilters("isContentZoomable", this.isImageContent() && this.state !== k.ERROR, this);
+    return this.instance.applyFilters("isContentZoomable", this.isImageContent() && this.state !== L.ERROR, this);
   }
   /**
    * Update image srcset sizes attribute based on width and height
@@ -350,7 +350,7 @@ class gs {
   append() {
     if (this.isAttached || !this.element)
       return;
-    if (this.isAttached = !0, this.state === k.ERROR) {
+    if (this.isAttached = !0, this.state === L.ERROR) {
       this.displayError();
       return;
     }
@@ -396,7 +396,7 @@ class gs {
   appendImage() {
     this.isAttached && (this.instance.dispatch("contentAppendImage", {
       content: this
-    }).defaultPrevented || (this.slide && this.element && !this.element.parentNode && this.slide.container.appendChild(this.element), (this.state === k.LOADED || this.state === k.ERROR) && this.removePlaceholder()));
+    }).defaultPrevented || (this.slide && this.element && !this.element.parentNode && this.slide.container.appendChild(this.element), (this.state === L.LOADED || this.state === L.ERROR) && this.removePlaceholder()));
   }
 }
 function ys(t, e) {
@@ -824,13 +824,13 @@ function J(t, ...e) {
   });
 }
 const Rs = (t) => t(), Qe = Symbol(), Ce = Symbol();
-function Le(t, e) {
+function ke(t, e) {
   t instanceof Map && e instanceof Map ? e.forEach((n, s) => t.set(s, n)) : t instanceof Set && e instanceof Set && e.forEach(t.add, t);
   for (const n in e) {
     if (!e.hasOwnProperty(n))
       continue;
     const s = e[n], i = t[n];
-    H(i) && H(s) && t.hasOwnProperty(n) && !oe(s) && !ze(s) ? t[n] = Le(i, s) : t[n] = s;
+    H(i) && H(s) && t.hasOwnProperty(n) && !oe(s) && !ze(s) ? t[n] = ke(i, s) : t[n] = s;
   }
   return t;
 }
@@ -860,9 +860,9 @@ function et(t, e, n, s) {
       return o[b].call(_, _);
     })), h), {}));
   }
-  return d = ke(t, u, e, n, s, !0), d;
+  return d = Le(t, u, e, n, s, !0), d;
 }
-function ke(t, e, n = {}, s, i, r) {
+function Le(t, e, n = {}, s, i, r) {
   let o;
   const l = I({ actions: {} }, n);
   if (process.env.NODE_ENV !== "production" && !s._e.active)
@@ -882,7 +882,7 @@ function ke(t, e, n = {}, s, i, r) {
       type: re.patchFunction,
       storeId: t,
       events: _
-    }) : (Le(s.state.value[t], g), p = {
+    }) : (ke(s.state.value[t], g), p = {
       type: re.patchObject,
       payload: g,
       storeId: t,
@@ -913,11 +913,11 @@ function ke(t, e, n = {}, s, i, r) {
     const O = function() {
       pe(s);
       const D = Array.from(arguments), Z = [], Re = [];
-      function Wt(L) {
-        Z.push(L);
+      function Wt(k) {
+        Z.push(k);
       }
-      function Jt(L) {
-        Re.push(L);
+      function Jt(k) {
+        Re.push(k);
       }
       J(b, {
         args: D,
@@ -929,10 +929,10 @@ function ke(t, e, n = {}, s, i, r) {
       let Q;
       try {
         Q = g.apply(this && this.$id === t ? this : y, D);
-      } catch (L) {
-        throw J(Re, L), L;
+      } catch (k) {
+        throw J(Re, k), k;
       }
-      return Q instanceof Promise ? Q.then((L) => (J(Z, L), L)).catch((L) => (J(Re, L), Promise.reject(L))) : (J(Z, Q), Q);
+      return Q instanceof Promise ? Q.then((k) => (J(Z, k), k)).catch((k) => (J(Re, k), Promise.reject(k))) : (J(Z, Q), Q);
     };
     return O[Qe] = !0, O[Ce] = p, O;
   }, N = /* @__PURE__ */ ee({
@@ -973,7 +973,7 @@ function ke(t, e, n = {}, s, i, r) {
   for (const g in U) {
     const p = U[g];
     if (oe(p) && !Ye(p) || ze(p))
-      process.env.NODE_ENV !== "production" && i ? E.value[g] = Pe(U, g) : r || (f && vs(p) && (oe(p) ? p.value = f[g] : Le(p, f[g])), s.state.value[t][g] = p), process.env.NODE_ENV !== "production" && N.state.push(g);
+      process.env.NODE_ENV !== "production" && i ? E.value[g] = Pe(U, g) : r || (f && vs(p) && (oe(p) ? p.value = f[g] : ke(p, f[g])), s.state.value[t][g] = p), process.env.NODE_ENV !== "production" && N.state.push(g);
     else if (typeof p == "function") {
       const O = process.env.NODE_ENV !== "production" && i ? p : x(p, g);
       U[g] = O, process.env.NODE_ENV !== "production" && (N.actions[g] = p), l.actions[g] = p;
@@ -1067,10 +1067,10 @@ function Ns(t, e, n) {
       throw new Error(`[🍍]: "getActivePinia()" was called but there was no active Pinia. Are you trying to use a store before calling "app.use(pinia)"?
 See https://pinia.vuejs.org/core-concepts/outside-component-usage.html for help.
 This will fail in production.`);
-    o = ne, o._s.has(t) || (i ? ke(t, e, s, o) : et(t, s, o), process.env.NODE_ENV !== "production" && (r._pinia = o));
+    o = ne, o._s.has(t) || (i ? Le(t, e, s, o) : et(t, s, o), process.env.NODE_ENV !== "production" && (r._pinia = o));
     const u = o._s.get(t);
     if (process.env.NODE_ENV !== "production" && l) {
-      const c = "__hot:" + t, h = i ? ke(c, e, s, o, !0) : et(c, I({}, s), o, !0);
+      const c = "__hot:" + t, h = i ? Le(c, e, s, o, !0) : et(c, I({}, s), o, !0);
       l._hotUpdate(h), delete o.state.value[c], o._s.delete(c);
     }
     if (process.env.NODE_ENV !== "production" && ie) {
@@ -1107,7 +1107,7 @@ const xs = we("string"), A = we("function"), Ot = we("number"), be = (t) => t !=
     return !1;
   const e = $e(t);
   return (e === null || e === Object.prototype || Object.getPrototypeOf(e) === null) && !(_t in t) && !(ye in t);
-}, Ls = j("Date"), ks = j("File"), Is = j("Blob"), Fs = j("FileList"), Us = (t) => be(t) && A(t.pipe), js = (t) => {
+}, ks = j("Date"), Ls = j("File"), Is = j("Blob"), Fs = j("FileList"), Us = (t) => be(t) && A(t.pipe), js = (t) => {
   let e;
   return t && (typeof FormData == "function" && t instanceof FormData || A(t.append) && ((e = Ee(t)) === "formdata" || // detect form-data instance
   e === "object" && A(t.toString) && t.toString() === "[object FormData]"));
@@ -1265,8 +1265,8 @@ const cn = (t) => {
   isResponse: $s,
   isHeaders: Vs,
   isUndefined: ae,
-  isDate: Ls,
-  isFile: ks,
+  isDate: ks,
+  isFile: Ls,
   isBlob: Is,
   isRegExp: sn,
   isFunction: A,
@@ -1538,7 +1538,7 @@ class it {
     });
   }
 }
-const Lt = {
+const kt = {
   silentJSONParsing: !0,
   forcedJSONParsing: !0,
   clarifyTimeoutError: !1
@@ -1581,7 +1581,7 @@ function Cn(t) {
     r = n[s], e[r] = t[r];
   return e;
 }
-function kt(t) {
+function Lt(t) {
   function e(n, s, i, r) {
     let o = n[r++];
     if (o === "__proto__") return !0;
@@ -1607,12 +1607,12 @@ function An(t, e, n) {
   return (n || JSON.stringify)(t);
 }
 const ce = {
-  transitional: Lt,
+  transitional: kt,
   adapter: ["xhr", "http", "fetch"],
   transformRequest: [function(e, n) {
     const s = n.getContentType() || "", i = s.indexOf("application/json") > -1, r = a.isObject(e);
     if (r && a.isHTMLForm(e) && (e = new FormData(e)), a.isFormData(e))
-      return i ? JSON.stringify(kt(e)) : e;
+      return i ? JSON.stringify(Lt(e)) : e;
     if (a.isArrayBuffer(e) || a.isBuffer(e) || a.isStream(e) || a.isFile(e) || a.isBlob(e) || a.isReadableStream(e))
       return e;
     if (a.isArrayBufferView(e))
@@ -1714,7 +1714,7 @@ function Dn(t) {
     e[s[1]] = s[2];
   return e;
 }
-const Ln = (t) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(t.trim());
+const kn = (t) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(t.trim());
 function Ae(t, e, n, s, i) {
   if (a.isFunction(s))
     return s.call(this, e, n);
@@ -1725,7 +1725,7 @@ function Ae(t, e, n, s, i) {
       return s.test(e);
   }
 }
-function kn(t) {
+function Ln(t) {
   return t.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (e, n, s) => n.toUpperCase() + s);
 }
 function In(t, e) {
@@ -1755,7 +1755,7 @@ let T = class {
     const o = (l, d) => a.forEach(l, (u, c) => r(u, c, d));
     if (a.isPlainObject(e) || e instanceof this.constructor)
       o(e, n);
-    else if (a.isString(e) && (e = e.trim()) && !Ln(e))
+    else if (a.isString(e) && (e = e.trim()) && !kn(e))
       o(xn(e), n);
     else if (a.isObject(e) && a.isIterable(e)) {
       let l = {}, d, u;
@@ -1821,7 +1821,7 @@ let T = class {
         n[o] = he(i), delete n[r];
         return;
       }
-      const l = e ? kn(r) : String(r).trim();
+      const l = e ? Ln(r) : String(r).trim();
       l !== r && delete n[r], n[l] = he(i), s[l] = !0;
     }), this;
   }
@@ -2124,7 +2124,7 @@ const jt = (t) => {
       s(new w("Network Error", w.ERR_NETWORK, t, m)), m = null;
     }, m.ontimeout = function() {
       let x = i.timeout ? "timeout of " + i.timeout + "ms exceeded" : "timeout exceeded";
-      const N = i.transitional || Lt;
+      const N = i.transitional || kt;
       i.timeoutErrorMessage && (x = i.timeoutErrorMessage), s(new w(
         x,
         N.clarifyTimeoutError ? w.ETIMEDOUT : w.ECONNABORTED,
@@ -2762,7 +2762,7 @@ P.spread = ni;
 P.isAxiosError = ii;
 P.mergeConfig = W;
 P.AxiosHeaders = T;
-P.formToJSON = (t) => kt(a.isHTMLForm(t) ? new FormData(t) : t);
+P.formToJSON = (t) => Lt(a.isHTMLForm(t) ? new FormData(t) : t);
 P.getAdapter = zt.getAdapter;
 P.HttpStatusCode = Me;
 P.default = P;
@@ -2777,8 +2777,8 @@ const {
   Cancel: Ti,
   isAxiosError: xi,
   spread: Di,
-  toFormData: Li,
-  AxiosHeaders: ki,
+  toFormData: ki,
+  AxiosHeaders: Li,
   HttpStatusCode: Ii,
   formToJSON: Fi,
   getAdapter: Ui,
@@ -2904,13 +2904,14 @@ const ui = /* @__PURE__ */ Ht(ri, [["render", ci]]), di = {
     flickrGallery: [],
     flickrLoadingStyle: null,
     loading: !1,
-    photos: []
+    photos: [],
+    flickrStore: null
   }),
   beforeMount() {
-    this.extras != null && (this.defaultExtras = this.extras), this.photos = this.loadFlickrPhotos(), this.galleryContainer != null ? this.galleryID = this.galleryContainer : this.galleryID = this.galleryID + "-" + this.$.uid;
+    this.flickrStore = pt(), this.extras != null && (this.defaultExtras = this.extras), this.loadFlickrPhotos(), this.galleryContainer != null ? this.galleryID = this.galleryContainer : this.galleryID = this.galleryID + "-" + this.$.uid;
   },
   mounted() {
-    pt(), this.initLightbox();
+    this.flickrStore = pt(), this.initLightbox();
   },
   watch: {},
   unmounted() {
@@ -2948,10 +2949,9 @@ const ui = /* @__PURE__ */ Ht(ri, [["render", ci]]), di = {
       }
     },
     async loadFlickrPhotos() {
-      const t = pt();
       this.loading = !0;
-      const e = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1";
-      await t.fetchPhotos(e, this.page), this.photos = t.photos, this.totalPages = t.totalPages, this.totalPictures = t.totalPictures, this.loading = t.loading;
+      const t = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1";
+      await this.flickrStore.fetchPhotos(t, this.page), this.photos = this.flickrStore.photos, this.totalPages = this.flickrStore.totalPages, this.totalPictures = this.flickrStore.totalPictures, this.loading = this.flickrStore.loading;
     },
     nextPage() {
       this.page < this.totalPages && (this.page++, this.loadFlickrPhotos());
@@ -2960,7 +2960,7 @@ const ui = /* @__PURE__ */ Ht(ri, [["render", ci]]), di = {
       this.page > 1 && (this.page--, this.loadFlickrPhotos());
     }
   },
-  async created() {
+  created() {
     this.title === void 0 && (this.title = "Selected Photos");
   }
 }, hi = ["id"], fi = { key: 0 }, pi = { class: "flickr-images" }, mi = {

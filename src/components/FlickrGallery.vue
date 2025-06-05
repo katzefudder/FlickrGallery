@@ -74,12 +74,14 @@ export default {
     flickrLoadingStyle: null,
     loading: false,
     photos: [],
+    flickrStore: null,
   }),
   beforeMount() {
+    this.flickrStore = useFlickrStore();
     if (this.extras != null) {
       this.defaultExtras = this.extras
     }
-    this.photos = this.loadFlickrPhotos()
+    this.loadFlickrPhotos();
     if (this.galleryContainer != null) {
       this.galleryID = this.galleryContainer
     } else {
@@ -87,7 +89,7 @@ export default {
     }
   },
   mounted() {
-    const flickrStore = useFlickrStore();
+    this.flickrStore = useFlickrStore();
     this.initLightbox();
   },
   watch: {
@@ -139,14 +141,13 @@ export default {
       }
     },
     async loadFlickrPhotos() {
-      const flickrStore = useFlickrStore();
       this.loading = true;
       const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
-      await flickrStore.fetchPhotos(url, this.page);
-      this.photos = flickrStore.photos;
-      this.totalPages = flickrStore.totalPages;
-      this.totalPictures = flickrStore.totalPictures;
-      this.loading = flickrStore.loading;
+      await this.flickrStore.fetchPhotos(url, this.page);
+      this.photos = this.flickrStore.photos;
+      this.totalPages = this.flickrStore.totalPages;
+      this.totalPictures = this.flickrStore.totalPictures;
+      this.loading = this.flickrStore.loading;
     },
     nextPage() {
       if (this.page < this.totalPages) {
@@ -161,7 +162,7 @@ export default {
       }
     },
   },
-  async created() {
+  created() {
     if (this.title === undefined) {
       this.title = "Selected Photos"
     }
