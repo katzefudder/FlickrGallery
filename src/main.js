@@ -8,5 +8,8 @@ const app = createApp(App);
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
+
+// FlickrGallery als Plugin verwenden:
 app.use(FlickrGallery);
+
 app.mount("#app");

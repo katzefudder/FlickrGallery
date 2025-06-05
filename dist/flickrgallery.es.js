@@ -3,7 +3,7 @@ const t = {
   install(o, l = {}) {
     o.component(
       "FlickrGallery",
-      n(() => import("./FlickrGallery-v4skOySa.js"))
+      n(() => import("./FlickrGallery-I5I6u5L2.js"))
     );
   }
 };
