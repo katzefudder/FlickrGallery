@@ -1,7 +1,11 @@
+// stores/flickr.js
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-export const useFlickrStore = defineStore('flickr', {
+/**
+ * Dynamic Flickr store factory, scoped by unique ID
+ */
+export const useFlickrStore = (id) => defineStore(`${id}`, {
   state: () => ({
     photos: [],
     totalPages: 1,
@@ -12,24 +16,28 @@ export const useFlickrStore = defineStore('flickr', {
   actions: {
     async fetchPhotos(url, page = 1) {
       if (this.photoCache[page]) {
-        this.photos = this.photoCache[page].photos;
-        this.totalPages = this.photoCache[page].totalPages;
-        this.totalPictures = this.photoCache[page].totalPictures;
-        // Prüfe, ob Cache-Eintrag abgelaufen ist (TTL: z.B. 5 Minuten)
-        const ttl = 30 * 60 * 1000; // 30 Minuten in ms
         const cached = this.photoCache[page];
-        console.debug(`images loaded from cache for page ${page} - cache valid for ${ttl / 1000} seconds, ${Math.ceil((Date.now() - cached.timestamp)/1000)} seconds old`);
-        if (Date.now() - (cached.timestamp || 0) < ttl) {
+        const ttl = 30 * 60 * 1000;
+        const age = Date.now() - (cached.timestamp || 0);
+
+        if (age < ttl) {
+          this.photos = cached.photos;
+          this.totalPages = cached.totalPages;
+          this.totalPictures = cached.totalPictures;
+          // console.debug(`🟢 Using cached data for page ${page} (${Math.ceil(age / 1000)}s old)`);
           return;
         }
-        // Cache abgelaufen, lösche Eintrag
+
+        // console.debug(`⚠️ Cache expired for page ${page}`);
         delete this.photoCache[page];
       }
-      console.log(`Lade Fotos von API für Seite ${page}`);
+
+      // console.log(`🔄 Fetching Flickr photos for page ${page}`);
       this.loading = true;
+
       const response = await axios.get(url);
-      // Passe das Mapping ggf. an deine API-Struktur an!
       let photos = [];
+
       if (response.data.photoset) {
         photos = response.data.photoset.photo;
         this.totalPages = response.data.photoset.pages;
@@ -39,15 +47,25 @@ export const useFlickrStore = defineStore('flickr', {
         this.totalPages = response.data.photos.pages;
         this.totalPictures = response.data.photos.total;
       }
+
       this.photos = photos;
       this.photoCache[page] = {
         photos,
         totalPages: this.totalPages,
         totalPictures: this.totalPictures,
-        timestamp: Date.now(), // Speichere den Zeitstempel
+        timestamp: Date.now(),
       };
+
       this.loading = false;
     },
   },
-  persist: true, // <--- aktiviert Persistenz für diesen Store
-});
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: `flickr-${id}`,
+        storage: localStorage,
+      }
+    ]
+  }
+})();

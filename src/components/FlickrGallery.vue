@@ -51,7 +51,9 @@ export default {
   name: 'FlickrGallery',
   components: {Image},
   props: {
-    galleryContainer: "flickr",
+    galleryContainer: {
+      type: String,
+    },
     title: String,
     useNavigation: Boolean,
     showPage: Boolean,
@@ -76,20 +78,11 @@ export default {
     photos: [],
     flickrStore: null,
   }),
-  beforeMount() {
-    this.flickrStore = useFlickrStore();
-    if (this.extras != null) {
-      this.defaultExtras = this.extras
-    }
-    this.loadFlickrPhotos();
-    if (this.galleryContainer != null) {
-      this.galleryID = this.galleryContainer
-    } else {
-      this.galleryID = this.galleryID+"-"+this.$.uid
-    }
-  },
   mounted() {
-    this.flickrStore = useFlickrStore();
+    const uid = 'flickr-' + this.$.uid;
+    this.galleryID = uid;
+    this.flickrStore = useFlickrStore(uid);
+    this.loadFlickrPhotos();
     this.initLightbox();
   },
   watch: {
@@ -161,11 +154,6 @@ export default {
         this.loadFlickrPhotos()
       }
     },
-  },
-  created() {
-    if (this.title === undefined) {
-      this.title = "Selected Photos"
-    }
   }
 };
 </script>

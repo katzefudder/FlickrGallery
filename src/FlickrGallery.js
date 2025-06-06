@@ -1,17 +1,32 @@
-import { defineAsyncComponent } from "vue";
+// src/FlickrGallery.js
+import { setPiniaInstance } from './plugin/context';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { defineAsyncComponent } from 'vue';
 
-const FlickrGallery = {
+export default {
   install(app, options = {}) {
-    if (!app._context.provides.pinia) {
-      console.warn('FlickrGallery uses Pinia! Please make sure you always call app.use(createPinia()) before using this plugin.');
+    const { pinia } = options;
+
+    if (!pinia) {
+      console.error('[FlickrGallery] Missing { pinia } option during install');
+      return;
     }
+
+    // ✅ Set the active Pinia instance globally
+    setPiniaInstance(pinia);
+
+    // ✅ Ensure persisted state plugin is applied
+    if (!pinia._p.some(p => p === piniaPluginPersistedstate)) {
+      pinia.use(piniaPluginPersistedstate);
+    }
+
+    // ✅ Register component asynchronously
     app.component(
-      "FlickrGallery",
-      defineAsyncComponent(() => import("./components/FlickrGallery.vue"))
+      'FlickrGallery',
+      defineAsyncComponent(() => import('./components/FlickrGallery.vue'))
     );
-  }
+  },
 };
 
-export {
-  FlickrGallery
-};
+// Optional: Named export for direct usage without plugin
+export { default as FlickrGalleryComponent } from './components/FlickrGallery.vue';
