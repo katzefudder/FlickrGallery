@@ -5,7 +5,7 @@
         <div v-if="!loading" :style="flickrLoadingStyle" class="flickr-container" ref="flickr-container">
           <h2 v-if="title">{{ title }}</h2>
             <div class="flickr-images">
-              <span v-for="(image) in photos">
+              <span v-for="(image, idx) in photos" :key="image.id || idx">
                 <Image :image="image"></Image>
               </span>
             </div>
@@ -51,14 +51,11 @@ export default {
   name: 'FlickrGallery',
   components: {Image},
   props: {
-    galleryContainer: {
-      type: String,
-    },
     title: String,
     useNavigation: Boolean,
     showPage: Boolean,
-    apiKey: String,
-    userId: String,
+    apiKey: { type: String, required: true },
+    userId: { type: String, required: true },
     method: String,
     photosetId: String,
     tags: String,
@@ -78,11 +75,17 @@ export default {
     photos: [],
     flickrStore: null,
   }),
-  mounted() {
+  async beforeMount() {
     const uid = 'flickr-' + this.$.uid;
-    this.galleryID = uid;
+    this.galleryID = this.galleryContainer ?? this.galleryID + "-" + this.$.uid;
     this.flickrStore = useFlickrStore(uid);
-    this.loadFlickrPhotos();
+    if (this.extras != null) {
+      this.defaultExtras = this.extras;
+    }
+    // Lade Fotos erst, wenn flickrStore gesetzt ist
+    await this.loadFlickrPhotos();
+  },
+  mounted() {
     this.initLightbox();
   },
   watch: {
@@ -130,17 +133,23 @@ export default {
             }
           });
         });
-        this.lightbox = lightbox.init();
+        lightbox.init();
+this.lightbox = lightbox;
       }
     },
     async loadFlickrPhotos() {
       this.loading = true;
-      const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
-      await this.flickrStore.fetchPhotos(url, this.page);
-      this.photos = this.flickrStore.photos;
-      this.totalPages = this.flickrStore.totalPages;
-      this.totalPictures = this.flickrStore.totalPictures;
-      this.loading = this.flickrStore.loading;
+      try {
+        const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
+        await this.flickrStore.fetchPhotos(url, this.page);
+        this.photos = this.flickrStore.photos;
+        this.totalPages = this.flickrStore.totalPages;
+        this.totalPictures = this.flickrStore.totalPictures;
+        this.loading = this.flickrStore.loading;
+      } catch (e) {
+        console.error('Fehler beim Laden der Flickr-Fotos:', e);
+        this.loading = false;
+      }
     },
     nextPage() {
       if (this.page < this.totalPages) {

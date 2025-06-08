@@ -1,4 +1,4 @@
-import { hasInjectionContext as es, inject as ts, getCurrentInstance as ss, ref as Et, reactive as ns, markRaw as ee, effectScope as rs, isRef as oe, isReactive as je, toRef as Pe, toRaw as is, nextTick as We, computed as wt, getCurrentScope as os, onScopeDispose as as, watch as ls, toRefs as Je, createElementBlock as j, openBlock as $, createElementVNode as M, normalizeClass as cs, resolveComponent as us, createVNode as Ke, createCommentVNode as Ne, Transition as ds, withCtx as hs, normalizeStyle as fs, toDisplayString as Ae, Fragment as ps, renderList as ms, withKeys as Ge, defineAsyncComponent as gs } from "vue";
+import { hasInjectionContext as es, inject as ts, getCurrentInstance as ss, ref as Et, reactive as ns, markRaw as ee, effectScope as rs, isRef as oe, isReactive as je, toRef as Pe, toRaw as is, nextTick as We, computed as wt, getCurrentScope as os, onScopeDispose as as, watch as ls, toRefs as Je, createElementBlock as j, openBlock as $, createElementVNode as z, normalizeClass as cs, resolveComponent as us, createVNode as Ke, createCommentVNode as Ne, Transition as ds, withCtx as hs, normalizeStyle as fs, toDisplayString as Ae, Fragment as ps, renderList as ms, withKeys as Ge, defineAsyncComponent as gs } from "vue";
 /*!
  * pinia v3.0.2
  * (c) 2025 Eduardo San Martin Morote
@@ -900,7 +900,7 @@ class Bs {
     }).defaultPrevented || (this.slide && this.element && !this.element.parentNode && this.slide.container.appendChild(this.element), (this.state === I.LOADED || this.state === I.ERROR) && this.removePlaceholder()));
   }
 }
-function zs(e, t) {
+function Ms(e, t) {
   if (e.getViewportSizeFn) {
     const n = e.getViewportSizeFn(e, t);
     if (n)
@@ -927,7 +927,7 @@ function de(e, t, n, s, r) {
   }
   return Number(i) || 0;
 }
-function Ms(e, t, n, s) {
+function zs(e, t, n, s) {
   return {
     x: t.x - de("left", e, t, n, s) - de("right", e, t, n, s),
     y: t.y - de("top", e, t, n, s) - de("bottom", e, t, n, s)
@@ -1023,8 +1023,8 @@ function Pt(e, t, n) {
   if (i) {
     r = new js(i, e, -1);
     let o;
-    t.pswp ? o = t.pswp.viewportSize : o = zs(i, t);
-    const a = Ms(i, o, e, n);
+    t.pswp ? o = t.pswp.viewportSize : o = Ms(i, t);
+    const a = zs(i, o, e, n);
     r.update(s.width, s.height, a);
   }
   return s.lazyLoad(), r && s.setDisplayedSize(Math.ceil(s.width * r.initial), Math.ceil(s.height * r.initial)), s;
@@ -1734,7 +1734,7 @@ class lt {
     });
   }
 }
-const zt = {
+const Mt = {
   silentJSONParsing: !0,
   forcedJSONParsing: !0,
   clarifyTimeoutError: !1
@@ -1746,12 +1746,12 @@ const zt = {
     Blob: Un
   },
   protocols: ["http", "https", "file", "blob", "url", "data"]
-}, He = typeof window < "u" && typeof document < "u", Ue = typeof navigator == "object" && navigator || void 0, zn = He && (!Ue || ["ReactNative", "NativeScript", "NS"].indexOf(Ue.product) < 0), Mn = typeof WorkerGlobalScope < "u" && // eslint-disable-next-line no-undef
+}, He = typeof window < "u" && typeof document < "u", Ue = typeof navigator == "object" && navigator || void 0, Mn = He && (!Ue || ["ReactNative", "NativeScript", "NS"].indexOf(Ue.product) < 0), zn = typeof WorkerGlobalScope < "u" && // eslint-disable-next-line no-undef
 self instanceof WorkerGlobalScope && typeof self.importScripts == "function", jn = He && window.location.href || "http://localhost", $n = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   hasBrowserEnv: He,
-  hasStandardBrowserEnv: zn,
-  hasStandardBrowserWebWorkerEnv: Mn,
+  hasStandardBrowserEnv: Mn,
+  hasStandardBrowserWebWorkerEnv: zn,
   navigator: Ue,
   origin: jn
 }, Symbol.toStringTag, { value: "Module" })), v = {
@@ -1777,7 +1777,7 @@ function Hn(e) {
     i = n[s], t[i] = e[i];
   return t;
 }
-function Mt(e) {
+function zt(e) {
   function t(n, s, r, i) {
     let o = n[i++];
     if (o === "__proto__") return !0;
@@ -1803,12 +1803,12 @@ function Wn(e, t, n) {
   return (n || JSON.stringify)(e);
 }
 const ue = {
-  transitional: zt,
+  transitional: Mt,
   adapter: ["xhr", "http", "fetch"],
   transformRequest: [function(t, n) {
     const s = n.getContentType() || "", r = s.indexOf("application/json") > -1, i = l.isObject(t);
     if (i && l.isHTMLForm(t) && (t = new FormData(t)), l.isFormData(t))
-      return r ? JSON.stringify(Mt(t)) : t;
+      return r ? JSON.stringify(zt(t)) : t;
     if (l.isArrayBuffer(t) || l.isBuffer(t) || l.isStream(t) || l.isFile(t) || l.isBlob(t) || l.isReadableStream(t))
       return t;
     if (l.isArrayBufferView(t))
@@ -2320,7 +2320,7 @@ const qt = (e) => {
       s(new w("Network Error", w.ERR_NETWORK, e, m)), m = null;
     }, m.ontimeout = function() {
       let x = r.timeout ? "timeout of " + r.timeout + "ms exceeded" : "timeout exceeded";
-      const A = r.transitional || zt;
+      const A = r.transitional || Mt;
       r.timeoutErrorMessage && (x = r.timeoutErrorMessage), s(new w(
         x,
         A.clarifyTimeoutError ? w.ETIMEDOUT : w.ECONNABORTED,
@@ -2547,12 +2547,12 @@ const pr = async (e) => {
       }
     ) : w.from(S, S && S.code, e, f);
   }
-}), ze = {
+}), Me = {
   http: xn,
   xhr: ar,
   fetch: gr
 };
-l.forEach(ze, (e, t) => {
+l.forEach(Me, (e, t) => {
   if (e) {
     try {
       Object.defineProperty(e, "name", { value: t });
@@ -2570,7 +2570,7 @@ const mt = (e) => `- ${e}`, yr = (e) => l.isFunction(e) || e === null || e === !
     for (let i = 0; i < t; i++) {
       n = e[i];
       let o;
-      if (s = n, !yr(n) && (s = ze[(o = String(n)).toLowerCase()], s === void 0))
+      if (s = n, !yr(n) && (s = Me[(o = String(n)).toLowerCase()], s === void 0))
         throw new w(`Unknown adapter '${o}'`);
       if (s)
         break;
@@ -2590,7 +2590,7 @@ const mt = (e) => `- ${e}`, yr = (e) => l.isFunction(e) || e === null || e === !
     }
     return s;
   },
-  adapters: ze
+  adapters: Me
 };
 function xe(e) {
   if (e.cancelToken && e.cancelToken.throwIfRequested(), e.signal && e.signal.aborted)
@@ -2662,7 +2662,7 @@ function Er(e, t, n) {
 const pe = {
   assertOptions: Er,
   validators: Oe
-}, z = pe.validators;
+}, M = pe.validators;
 let q = class {
   constructor(t) {
     this.defaults = t || {}, this.interceptors = {
@@ -2699,17 +2699,17 @@ let q = class {
     typeof t == "string" ? (n = n || {}, n.url = t) : n = t || {}, n = W(this.defaults, n);
     const { transitional: s, paramsSerializer: r, headers: i } = n;
     s !== void 0 && pe.assertOptions(s, {
-      silentJSONParsing: z.transitional(z.boolean),
-      forcedJSONParsing: z.transitional(z.boolean),
-      clarifyTimeoutError: z.transitional(z.boolean)
+      silentJSONParsing: M.transitional(M.boolean),
+      forcedJSONParsing: M.transitional(M.boolean),
+      clarifyTimeoutError: M.transitional(M.boolean)
     }, !1), r != null && (l.isFunction(r) ? n.paramsSerializer = {
       serialize: r
     } : pe.assertOptions(r, {
-      encode: z.function,
-      serialize: z.function
+      encode: M.function,
+      serialize: M.function
     }, !0)), n.allowAbsoluteUrls !== void 0 || (this.defaults.allowAbsoluteUrls !== void 0 ? n.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls : n.allowAbsoluteUrls = !0), pe.assertOptions(n, {
-      baseUrl: z.spelling("baseURL"),
-      withXsrfToken: z.spelling("withXSRFToken")
+      baseUrl: M.spelling("baseURL"),
+      withXsrfToken: M.spelling("withXSRFToken")
     }, !0), n.method = (n.method || this.defaults.method || "get").toLowerCase();
     let o = i && l.merge(
       i.common,
@@ -2868,7 +2868,7 @@ function br(e) {
 function _r(e) {
   return l.isObject(e) && e.isAxiosError === !0;
 }
-const Me = {
+const ze = {
   Continue: 100,
   SwitchingProtocols: 101,
   Processing: 102,
@@ -2933,8 +2933,8 @@ const Me = {
   NotExtended: 510,
   NetworkAuthenticationRequired: 511
 };
-Object.entries(Me).forEach(([e, t]) => {
-  Me[t] = e;
+Object.entries(ze).forEach(([e, t]) => {
+  ze[t] = e;
 });
 function Xt(e) {
   const t = new q(e), n = Nt(q.prototype.request, t);
@@ -2958,9 +2958,9 @@ P.spread = br;
 P.isAxiosError = _r;
 P.mergeConfig = W;
 P.AxiosHeaders = T;
-P.formToJSON = (e) => Mt(l.isHTMLForm(e) ? new FormData(e) : e);
+P.formToJSON = (e) => zt(l.isHTMLForm(e) ? new FormData(e) : e);
 P.getAdapter = Jt.getAdapter;
-P.HttpStatusCode = Me;
+P.HttpStatusCode = ze;
 P.default = P;
 const {
   Axios: Vr,
@@ -3064,11 +3064,11 @@ function Ar(e, t, n, s, r, i) {
     target: "_blank",
     rel: "noreferrer"
   }, [
-    M("span", {
+    z("span", {
       class: "hidden-caption-content",
       innerHTML: r.imageDescription
     }, null, 8, Pr),
-    M("img", {
+    z("img", {
       src: n.image.url_m,
       alt: n.image.title,
       onMouseover: t[0] || (t[0] = (...o) => i.enlargeImage && i.enlargeImage(...o)),
@@ -3084,14 +3084,11 @@ const vr = /* @__PURE__ */ Zt(Or, [["render", Ar]]), Cr = {
   name: "FlickrGallery",
   components: { Image: vr },
   props: {
-    galleryContainer: {
-      type: String
-    },
     title: String,
     useNavigation: Boolean,
     showPage: Boolean,
-    apiKey: String,
-    userId: String,
+    apiKey: { type: String, required: !0 },
+    userId: { type: String, required: !0 },
     method: String,
     photosetId: String,
     tags: String,
@@ -3112,9 +3109,12 @@ const vr = /* @__PURE__ */ Zt(Or, [["render", Ar]]), Cr = {
     photos: [],
     flickrStore: null
   }),
-  mounted() {
+  async beforeMount() {
     const e = "flickr-" + this.$.uid;
-    this.galleryID = e, this.flickrStore = Sr(e), this.loadFlickrPhotos(), this.initLightbox();
+    this.galleryID = this.galleryContainer ?? this.galleryID + "-" + this.$.uid, this.flickrStore = Sr(e), this.extras != null && (this.defaultExtras = this.extras), await this.loadFlickrPhotos();
+  },
+  mounted() {
+    this.initLightbox();
   },
   watch: {},
   unmounted() {
@@ -3148,13 +3148,17 @@ const vr = /* @__PURE__ */ Zt(Or, [["render", Ar]]), Cr = {
               });
             }
           });
-        }), this.lightbox = t.init();
+        }), t.init(), this.lightbox = t;
       }
     },
     async loadFlickrPhotos() {
       this.loading = !0;
-      const e = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1";
-      await this.flickrStore.fetchPhotos(e, this.page), this.photos = this.flickrStore.photos, this.totalPages = this.flickrStore.totalPages, this.totalPictures = this.flickrStore.totalPictures, this.loading = this.flickrStore.loading;
+      try {
+        const e = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1";
+        await this.flickrStore.fetchPhotos(e, this.page), this.photos = this.flickrStore.photos, this.totalPages = this.flickrStore.totalPages, this.totalPictures = this.flickrStore.totalPictures, this.loading = this.flickrStore.loading;
+      } catch (e) {
+        console.error("Fehler beim Laden der Flickr-Fotos:", e), this.loading = !1;
+      }
     },
     nextPage() {
       this.page < this.totalPages && (this.page++, this.loadFlickrPhotos());
@@ -3179,30 +3183,32 @@ function Ur(e, t, n, s, r, i) {
           ref: "flickr-container"
         }, [
           n.title ? ($(), j("h2", xr, Ae(n.title), 1)) : Ne("", !0),
-          M("div", Dr, [
-            ($(!0), j(ps, null, ms(e.photos, (a) => ($(), j("span", null, [
+          z("div", Dr, [
+            ($(!0), j(ps, null, ms(e.photos, (a, d) => ($(), j("span", {
+              key: a.id || d
+            }, [
               Ke(o, { image: a }, null, 8, ["image"])
-            ]))), 256))
+            ]))), 128))
           ])
         ], 4))
       ]),
       _: 1
     }),
     n.useNavigation ? ($(), j("div", kr, [
-      M("span", Ir, [
-        M("button", {
+      z("span", Ir, [
+        z("button", {
           onClick: t[0] || (t[0] = (...a) => i.previousPage && i.previousPage(...a)),
           onKeyup: t[1] || (t[1] = Ge((...a) => i.previousPage && i.previousPage(...a), ["right"]))
         }, " << ", 32)
       ]),
-      M("span", Fr, [
-        M("button", {
+      z("span", Fr, [
+        z("button", {
           onClick: t[2] || (t[2] = () => {
           })
         }, " Page " + Ae(e.page) + "/" + Ae(e.totalPages), 1)
       ]),
-      M("span", Lr, [
-        M("button", {
+      z("span", Lr, [
+        z("button", {
           onClick: t[3] || (t[3] = (...a) => i.nextPage && i.nextPage(...a)),
           onKeyup: t[4] || (t[4] = Ge((...a) => i.nextPage && i.nextPage(...a), ["right"]))
         }, " >> ", 32)
@@ -3210,7 +3216,7 @@ function Ur(e, t, n, s, r, i) {
     ])) : Ne("", !0)
   ], 8, Tr);
 }
-const Br = /* @__PURE__ */ Zt(Cr, [["render", Ur]]), zr = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const Br = /* @__PURE__ */ Zt(Cr, [["render", Ur]]), Mr = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Br
 }, Symbol.toStringTag, { value: "Module" })), ii = {
@@ -3222,7 +3228,7 @@ const Br = /* @__PURE__ */ Zt(Cr, [["render", Ur]]), zr = /* @__PURE__ */ Object
     }
     Ss(n), n._p.some((s) => s === st) || n.use(st), e.component(
       "FlickrGallery",
-      gs(() => Promise.resolve().then(() => zr))
+      gs(() => Promise.resolve().then(() => Mr))
     );
   }
 };
