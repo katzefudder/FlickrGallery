@@ -161,6 +161,44 @@ img.pswp__img {
   opacity: 0;
 }
 
+/* Loader & Error UI */
+.flickr-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0,0,0,0.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.flickr-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #f2b8b5;
+  background: #fdeceb;
+  color: #b0211f;
+  border-radius: 6px;
+}
+.flickr-retry {
+  margin-left: auto;
+  padding: 6px 10px;
+  border: 1px solid #b0211f;
+  background: #fff;
+  color: #b0211f;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .flickr-container {
     max-width: 350px;

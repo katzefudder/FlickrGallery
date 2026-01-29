@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-import FlickrGallery from './FlickrGallery.js';
+import FlickrGallery from './FlickrGallery';
 
 const app = createApp(App);
 const pinia = createPinia();

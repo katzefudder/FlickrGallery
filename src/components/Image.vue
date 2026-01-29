@@ -6,14 +6,16 @@
       :data-pswp-width="image.width_l || image.width_m"
       :data-pswp-height="image.height_l || image.height_m"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
   >
-    <span class="hidden-caption-content" v-html="imageDescription"></span>
+    <span class="hidden-caption-content" v-html="sanitizedDescription"></span>
     <img
-         :src="image.url_m"
+          :src="image.url_m || image.url_l"
          :alt="image.title"
          @mouseover="enlargeImage"
          @mouseout="shrinkImage"
+         loading="lazy"
+         decoding="async"
          :class="{
           'img-default-size': true,
           'img-enlarged-size': imageEnlarged,
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import DOMPurify from 'dompurify';
 export default {
   name: "Image",
   props: {
@@ -35,16 +38,16 @@ export default {
   data() {
     return {
       imageEnlarged: false,
-      imageDescription: `<b>${this.image.title}</b><br>${this.image.description? (this.image.description._content || this.image.description) : ''}`
     };
   },
-  watch: {
-    image: {
-      handler(newVal) {
-        this.imageDescription = `<b>${newVal.title}</b><br>${newVal.description? (newVal.description._content || newVal.description) : ''}`;
-      },
-      immediate: true,
-      deep: true
+  computed: {
+    descriptionHtml() {
+      const title = this.image?.title || '';
+      const descRaw = this.image?.description ? (this.image.description._content || this.image.description) : '';
+      return `<b>${title}</b><br>${descRaw}`;
+    },
+    sanitizedDescription() {
+      return DOMPurify.sanitize(this.descriptionHtml, { USE_PROFILES: { html: true } });
     }
   },
   methods: {

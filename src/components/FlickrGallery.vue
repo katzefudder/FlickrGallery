@@ -2,10 +2,18 @@
   <!-- Gallery begin -->
     <div :id="galleryID" >
       <Transition name="fade">
-        <div v-if="!loading" :style="flickrLoadingStyle" class="flickr-container" ref="flickr-container">
+        <div class="flickr-container" ref="flickr-container">
           <h2 v-if="title">{{ title }}</h2>
-            <div class="flickr-images">
-              <span v-for="(image, idx) in photos" :key="image.id || idx">
+            <div v-if="flickrStore.error" class="flickr-error" role="alert">
+              <strong>Fehler:</strong> {{ flickrStore.error }}
+              <button class="flickr-retry" @click="loadFlickrPhotos" aria-label="Erneut laden">Erneut laden</button>
+            </div>
+            <div v-else-if="flickrStore.loading" class="flickr-loading" aria-busy="true" aria-live="polite">
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="loading-text">Lade Bilder…</span>
+            </div>
+            <div v-else class="flickr-images">
+              <span v-for="(image, idx) in flickrStore.photos" :key="image.id ?? idx">
                 <Image :image="image"></Image>
               </span>
             </div>
@@ -15,22 +23,20 @@
         <span class="prev">
           <button
               @click="previousPage"
-              @keyup.right="previousPage"
+              @keyup.left="previousPage"
+              aria-label="Vorherige Seite"
           >
             &lt;&lt;
           </button>
         </span>
-        <span class="current">
-          <button
-              @click=""
-          >
-            Page {{page}}/{{totalPages}}
-          </button>
+        <span class="current" v-if="showPage">
+          <span aria-live="polite">Page {{page}}/{{totalPages}}</span>
         </span>
         <span class="next">
           <button
               @click="nextPage"
               @keyup.right="nextPage"
+              aria-label="Nächste Seite"
           >
             &gt;&gt;
           </button>
@@ -52,14 +58,14 @@ export default {
   components: {Image},
   props: {
     title: String,
-    useNavigation: Boolean,
-    showPage: Boolean,
+    useNavigation: { type: Boolean, default: true },
+    showPage: { type: Boolean, default: true },
     apiKey: { type: String, required: true },
     userId: { type: String, required: true },
-    method: String,
-    photosetId: String,
-    tags: String,
-    extras: String,
+    method: { type: String, default: 'flickr.photos.search' },
+    photosetId: { type: String, default: '' },
+    tags: { type: String, default: '' },
+    extras: { type: String, default: '' },
   },
   data: () => ({
     galleryID: "flickr",
@@ -69,20 +75,16 @@ export default {
     totalPictures: 0,
     totalPages: 0,
     defaultExtras: 'url_m,url_l,owner_name,description', // https://www.flickr.com/services/api/flickr.photos.search.html
-    flickrGallery: [],
-    flickrLoadingStyle: null,
     loading: false,
-    photos: [],
     flickrStore: null,
   }),
   async beforeMount() {
     const uid = 'flickr-' + this.$.uid;
-    this.galleryID = this.galleryContainer ?? this.galleryID + "-" + this.$.uid;
+    this.galleryID = this.galleryID + "-" + this.$.uid;
     this.flickrStore = useFlickrStore(uid);
-    if (this.extras != null) {
+    if (this.extras) {
       this.defaultExtras = this.extras;
     }
-    // Lade Fotos erst, wenn flickrStore gesetzt ist
     await this.loadFlickrPhotos();
   },
   mounted() {
@@ -123,7 +125,6 @@ export default {
                     // get caption from element with class hidden-caption-content
                     captionHTML = hiddenCaption.innerHTML;
                   } else {
-                    console.debug(currSlideElement)
                     // get caption from alt attribute
                     captionHTML = currSlideElement.querySelector('img').getAttribute('alt');
                   }
@@ -140,9 +141,19 @@ this.lightbox = lightbox;
     async loadFlickrPhotos() {
       this.loading = true;
       try {
-        const url = this.endpoint + "?method=" + this.method + "&api_key=" + this.apiKey + "&tags=" + this.tags + "&user_id=" + this.userId + "&photoset_id=" + this.photosetId + "&format=json&page=" + this.page + "&per_page=" + this.perPage + "&extras=" + this.defaultExtras + "&nojsoncallback=1"
-        await this.flickrStore.fetchPhotos(url, this.page);
-        this.photos = this.flickrStore.photos;
+        const params = new URLSearchParams();
+        params.set('method', this.method);
+        params.set('api_key', this.apiKey);
+        if (this.tags) params.set('tags', this.tags);
+        if (this.userId) params.set('user_id', this.userId);
+        if (this.photosetId) params.set('photoset_id', this.photosetId);
+        params.set('format', 'json');
+        params.set('page', String(this.page));
+        params.set('per_page', String(this.perPage));
+        params.set('extras', this.defaultExtras);
+        params.set('nojsoncallback', '1');
+        const url = `${this.endpoint}?${params.toString()}`;
+        await this.flickrStore.fetchPhotos(url);
         this.totalPages = this.flickrStore.totalPages;
         this.totalPictures = this.flickrStore.totalPictures;
         this.loading = this.flickrStore.loading;

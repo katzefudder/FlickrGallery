@@ -1,71 +1,61 @@
 // stores/flickr.js
 import { defineStore } from 'pinia';
-import axios from 'axios';
 
-/**
- * Dynamic Flickr store factory, scoped by unique ID
- */
-export const useFlickrStore = (id) => defineStore(`${id}`, {
-  state: () => ({
-    photos: [],
-    totalPages: 1,
-    totalPictures: 0,
-    loading: false,
-    photoCache: {}, // Cache für Seiten
-  }),
-  actions: {
-    async fetchPhotos(url, page = 1) {
-      if (this.photoCache[page]) {
-        const cached = this.photoCache[page];
-        const ttl = 30 * 60 * 1000;
-        const age = Date.now() - (cached.timestamp || 0);
+// Factory für einen pro-Instanz Store, basierend auf uid
+export function useFlickrStore(uid = 'default') {
+  const storeId = `flickr-${uid}`;
+  const useStore = defineStore(storeId, {
+    state: () => ({
+      photos: [],
+      totalPages: 0,
+      totalPictures: 0,
+      loading: false,
+      error: null,
+    }),
+    actions: {
+      async fetchPhotos(url) {
+        this.loading = true;
+        this.error = null;
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          const data = await response.json();
 
-        if (age < ttl) {
-          this.photos = cached.photos;
-          this.totalPages = cached.totalPages;
-          this.totalPictures = cached.totalPictures;
-          // console.debug(`🟢 Using cached data for page ${page} (${Math.ceil(age / 1000)}s old)`);
-          return;
+          if (data?.stat && data.stat !== 'ok') {
+            // Flickr Fehlerantwort
+            throw new Error(data?.message ? `Flickr: ${data.message}` : 'Flickr API Error');
+          }
+
+          if (data?.photos) {
+            // flickr.photos.search
+            this.photos = Array.isArray(data.photos.photo) ? data.photos.photo : [];
+            this.totalPages = Number(data.photos.pages || 0);
+            this.totalPictures = Number(data.photos.total || 0);
+          } else if (data?.photoset) {
+            // flickr.photosets.getPhotos
+            this.photos = Array.isArray(data.photoset.photo) ? data.photoset.photo : [];
+            this.totalPages = Number(data.photoset.pages || 0);
+            this.totalPictures = Number(data.photoset.total || 0);
+          } else {
+            // Unbekannte Struktur
+            this.photos = [];
+            this.totalPages = 0;
+            this.totalPictures = 0;
+            console.error('Unerwartete Flickr API Antwortstruktur', data);
+          }
+        } catch (e) {
+          console.error('Fehler beim Laden der Flickr-Fotos im Store:', e);
+          this.error = e?.message || String(e);
+          this.photos = [];
+          this.totalPages = 0;
+          this.totalPictures = 0;
+        } finally {
+          this.loading = false;
         }
-
-        // console.debug(`⚠️ Cache expired for page ${page}`);
-        delete this.photoCache[page];
       }
-
-      // console.log(`🔄 Fetching Flickr photos for page ${page}`);
-      this.loading = true;
-
-      const response = await axios.get(url);
-      let photos = [];
-
-      if (response.data.photoset) {
-        photos = response.data.photoset.photo;
-        this.totalPages = response.data.photoset.pages;
-        this.totalPictures = response.data.photoset.total;
-      } else if (response.data.photos) {
-        photos = response.data.photos.photo;
-        this.totalPages = response.data.photos.pages;
-        this.totalPictures = response.data.photos.total;
-      }
-
-      this.photos = photos;
-      this.photoCache[page] = {
-        photos,
-        totalPages: this.totalPages,
-        totalPictures: this.totalPictures,
-        timestamp: Date.now(),
-      };
-
-      this.loading = false;
-    },
-  },
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: `flickr-${id}`,
-        storage: localStorage,
-      }
-    ]
-  }
-})();
+    }
+  });
+  return useStore();
+}
