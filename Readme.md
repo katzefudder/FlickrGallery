@@ -25,10 +25,22 @@ app.mount('#app')
 App.vue
 ```
 <template>
-    <FlickrGallery title="All images of a specific user" user-id="_user_id" photoset-id="" api-key="_api_key" tags=""  method="flickr.photos.search" extras="url_m,url_l,owner_name"></FlickrGallery>
+        <FlickrGallery
+            title="All images of a specific user"
+            user-id="_user_id"
+            photoset-id=""
+            api-key="_api_key"
+            tags=""
+            method="flickr.photos.search"
+            extras="url_m,url_l,owner_name"
+            per-page="24"
+        />
 </template>
 
 <script>
 ...
 </script>
 ```
+
+Notes
+- `per-page` (Number, default: 18) steuert die pro Seite geladenen Bilder. Maximal werden 500 akzeptiert.

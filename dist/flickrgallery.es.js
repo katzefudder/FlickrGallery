@@ -1,4 +1,4 @@
-import { hasInjectionContext as _t, inject as Et, getCurrentInstance as Hi, ref as yi, reactive as Gi, markRaw as Oe, effectScope as Vi, isRef as Le, isReactive as Nt, toRef as lt, toRaw as Wi, nextTick as Jt, getCurrentScope as $i, onScopeDispose as Bi, watch as ji, computed as Ti, toRefs as Qt, openBlock as X, createElementBlock as q, createElementVNode as H, normalizeClass as Yi, resolveComponent as Xi, createVNode as ei, Transition as qi, withCtx as Ki, toDisplayString as Ve, createCommentVNode as ct, createTextVNode as Zi, Fragment as Ji, renderList as Qi, withKeys as ti, defineAsyncComponent as es } from "vue";
+import { hasInjectionContext as _t, inject as Et, getCurrentInstance as Hi, ref as yi, reactive as Vi, markRaw as Oe, effectScope as Gi, isRef as Le, isReactive as Nt, toRef as lt, toRaw as Wi, nextTick as Jt, getCurrentScope as $i, onScopeDispose as Bi, watch as ji, computed as Ti, toRefs as Qt, openBlock as X, createElementBlock as q, createElementVNode as H, normalizeClass as Yi, resolveComponent as Xi, createVNode as ei, Transition as qi, withCtx as Ki, toDisplayString as Ge, createCommentVNode as ct, createTextVNode as Zi, Fragment as Ji, renderList as Qi, withKeys as ti, defineAsyncComponent as es } from "vue";
 /*!
  * pinia v3.0.4
  * (c) 2025 Eduardo San Martin Morote
@@ -61,7 +61,7 @@ const is = process.env.NODE_ENV !== "production" ? Symbol("pinia:skipHydration")
 function ss(s) {
   return !re(s) || !Object.prototype.hasOwnProperty.call(s, is);
 }
-const { assign: G } = Object;
+const { assign: V } = Object;
 function ni(s) {
   return !!(Le(s) && s.effect);
 }
@@ -74,7 +74,7 @@ function ri(s, e, i, t) {
       // use ref() to unwrap refs inside state TODO: check if this is still necessary
       Qt(yi(r ? r() : {}).value)
     ) : Qt(i.state.value[s]);
-    return G(T, o, Object.keys(c || {}).reduce((v, R) => (process.env.NODE_ENV !== "production" && R in T && console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${R}" in store "${s}".`), v[R] = Oe(Ti(() => {
+    return V(T, o, Object.keys(c || {}).reduce((v, R) => (process.env.NODE_ENV !== "production" && R in T && console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${R}" in store "${s}".`), v[R] = Oe(Ti(() => {
       Re(i);
       const N = i._s.get(s);
       return c[R].call(N, N);
@@ -84,7 +84,7 @@ function ri(s, e, i, t) {
 }
 function St(s, e, i = {}, t, r, o) {
   let c;
-  const f = G({ actions: {} }, i);
+  const f = V({ actions: {} }, i);
   if (process.env.NODE_ENV !== "production" && !t._e.active)
     throw new Error("Pinia destroyed");
   const E = { deep: !0 };
@@ -116,7 +116,7 @@ function St(s, e, i = {}, t, r, o) {
   const Ye = o ? function() {
     const { state: l } = i, g = l ? l() : {};
     this.$patch((P) => {
-      G(P, g);
+      V(P, g);
     });
   } : (
     /* istanbul ignore next */
@@ -174,11 +174,11 @@ function St(s, e, i = {}, t, r, o) {
           type: Pe.direct,
           events: N
         }, Z);
-      }, G({}, E, l)));
+      }, V({}, E, l)));
       return g;
     },
     $dispose: oe
-  }, p = Gi(process.env.NODE_ENV !== "production" || process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test" && ge ? G(
+  }, p = Vi(process.env.NODE_ENV !== "production" || process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test" && ge ? V(
     {
       _hmrPayload: $,
       _customProperties: Oe(/* @__PURE__ */ new Set())
@@ -189,7 +189,7 @@ function St(s, e, i = {}, t, r, o) {
     // setupStore
   ) : ae);
   t._s.set(s, p);
-  const B = (t._a && t._a.runWithContext || ts)(() => t._e.run(() => (c = Vi()).run(() => e({ action: b }))));
+  const B = (t._a && t._a.runWithContext || ts)(() => t._e.run(() => (c = Gi()).run(() => e({ action: b }))));
   for (const h in B) {
     const l = B[h];
     if (Le(l) && !ni(l) || Nt(l))
@@ -203,13 +203,13 @@ function St(s, e, i = {}, t, r, o) {
     ) : l, ge && (B._getters || // @ts-expect-error: same
     (B._getters = Oe([]))).push(h));
   }
-  if (G(p, B), G(Wi(p), B), Object.defineProperty(p, "$state", {
+  if (V(p, B), V(Wi(p), B), Object.defineProperty(p, "$state", {
     get: () => process.env.NODE_ENV !== "production" && r ? _e.value : t.state.value[s],
     set: (h) => {
       if (process.env.NODE_ENV !== "production" && r)
         throw new Error("cannot set hotState");
       ke((l) => {
-        G(l, h);
+        V(l, h);
       });
     }
   }), process.env.NODE_ENV !== "production" && (p._hotUpdate = Oe((h) => {
@@ -250,7 +250,7 @@ function St(s, e, i = {}, t, r, o) {
       enumerable: !1
     };
     ["_p", "_hmrPayload", "_getters", "_customProperties"].forEach((l) => {
-      Object.defineProperty(p, l, G({ value: p[l] }, h));
+      Object.defineProperty(p, l, V({ value: p[l] }, h));
     });
   }
   return t._p.forEach((h) => {
@@ -261,9 +261,9 @@ function St(s, e, i = {}, t, r, o) {
         pinia: t,
         options: f
       }));
-      Object.keys(l || {}).forEach((g) => p._customProperties.add(g)), G(p, l);
+      Object.keys(l || {}).forEach((g) => p._customProperties.add(g)), V(p, l);
     } else
-      G(p, c.run(() => h({
+      V(p, c.run(() => h({
         store: p,
         app: t._a,
         pinia: t,
@@ -290,7 +290,7 @@ This will fail in production.`);
     c = ne, c._s.has(s) || (r ? St(s, e, t, c) : ri(s, t, c), process.env.NODE_ENV !== "production" && (o._pinia = c));
     const _ = c._s.get(s);
     if (process.env.NODE_ENV !== "production" && f) {
-      const T = "__hot:" + s, v = r ? St(T, e, t, c, !0) : ri(T, G({}, t), c, !0);
+      const T = "__hot:" + s, v = r ? St(T, e, t, c, !0) : ri(T, V({}, t), c, !0);
       f._hotUpdate(v), delete c.state.value[T], c._s.delete(T);
     }
     if (process.env.NODE_ENV !== "production" && ge) {
@@ -1234,7 +1234,7 @@ const {
 } = Object;
 let {
   freeze: k,
-  seal: V,
+  seal: G,
   create: vt
 } = Object, {
   apply: bt,
@@ -1243,7 +1243,7 @@ let {
 k || (k = function(e) {
   return e;
 });
-V || (V = function(e) {
+G || (G = function(e) {
   return e;
 });
 bt || (bt = function(e, i) {
@@ -1313,18 +1313,18 @@ function we(s, e) {
   }
   return i;
 }
-const fi = k(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]), ft = k(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]), pt = k(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]), Cs = k(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]), mt = k(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]), ks = k(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]), pi = k(["#text"]), mi = k(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]), gt = k(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]), gi = k(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]), Be = k(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]), Ms = V(/\{\{[\w\W]*|[\w\W]*\}\}/gm), xs = V(/<%[\w\W]*|[\w\W]*%>/gm), Fs = V(/\$\{[\w\W]*/gm), zs = V(/^data-[\-\w.\u00B7-\uFFFF]+$/), Us = V(/^aria-[\-\w]+$/), Ii = V(
+const fi = k(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]), ft = k(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]), pt = k(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]), Cs = k(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]), mt = k(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]), ks = k(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]), pi = k(["#text"]), mi = k(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]), gt = k(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]), gi = k(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]), Be = k(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]), Ms = G(/\{\{[\w\W]*|[\w\W]*\}\}/gm), xs = G(/<%[\w\W]*|[\w\W]*%>/gm), Fs = G(/\$\{[\w\W]*/gm), zs = G(/^data-[\-\w.\u00B7-\uFFFF]+$/), Us = G(/^aria-[\-\w]+$/), Ii = G(
   /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i
   // eslint-disable-line no-useless-escape
-), Hs = V(/^(?:\w+script|data):/i), Gs = V(
+), Hs = G(/^(?:\w+script|data):/i), Vs = G(
   /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205F\u3000]/g
   // eslint-disable-line no-control-regex
-), Di = V(/^html$/i), Vs = V(/^[a-z][.\w]*(-[.\w]+)+$/i);
+), Di = G(/^html$/i), Gs = G(/^[a-z][.\w]*(-[.\w]+)+$/i);
 var _i = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   ARIA_ATTR: Us,
-  ATTR_WHITESPACE: Gs,
-  CUSTOM_ELEMENT: Vs,
+  ATTR_WHITESPACE: Vs,
+  CUSTOM_ELEMENT: Gs,
   DATA_ATTR: zs,
   DOCTYPE_NAME: Di,
   ERB_EXPR: xs,
@@ -1468,7 +1468,7 @@ function Pi() {
   const Ut = m({}, ["alt", "class", "for", "id", "label", "name", "pattern", "placeholder", "role", "summary", "title", "value", "style", "xmlns"]), ze = "http://www.w3.org/1998/Math/MathML", Ue = "http://www.w3.org/2000/svg", J = "http://www.w3.org/1999/xhtml";
   let de = J, st = !1, nt = null;
   const Ci = m({}, [ze, Ue, J], ht);
-  let He = m({}, ["mi", "mo", "mn", "ms", "mtext"]), Ge = m({}, ["annotation-xml"]);
+  let He = m({}, ["mi", "mo", "mn", "ms", "mtext"]), Ve = m({}, ["annotation-xml"]);
   const ki = m({}, ["title", "style", "font", "a", "script"]);
   let Se = null;
   const Mi = ["application/xhtml+xml", "text/html"], xi = "text/html";
@@ -1479,7 +1479,7 @@ function Pi() {
     let n = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
     if (!(fe && fe === n)) {
       if ((!n || typeof n != "object") && (n = {}), n = K(n), Se = // eslint-disable-next-line unicorn/prefer-includes
-      Mi.indexOf(n.PARSER_MEDIA_TYPE) === -1 ? xi : n.PARSER_MEDIA_TYPE, w = Se === "application/xhtml+xml" ? ht : je, O = W(n, "ALLOWED_TAGS") ? m({}, n.ALLOWED_TAGS, w) : Pt, I = W(n, "ALLOWED_ATTR") ? m({}, n.ALLOWED_ATTR, w) : Lt, nt = W(n, "ALLOWED_NAMESPACES") ? m({}, n.ALLOWED_NAMESPACES, ht) : Ci, it = W(n, "ADD_URI_SAFE_ATTR") ? m(K(Ut), n.ADD_URI_SAFE_ATTR, w) : Ut, Ft = W(n, "ADD_DATA_URI_TAGS") ? m(K(zt), n.ADD_DATA_URI_TAGS, w) : zt, j = W(n, "FORBID_CONTENTS") ? m({}, n.FORBID_CONTENTS, w) : tt, ye = W(n, "FORBID_TAGS") ? m({}, n.FORBID_TAGS, w) : K({}), Ke = W(n, "FORBID_ATTR") ? m({}, n.FORBID_ATTR, w) : K({}), he = W(n, "USE_PROFILES") ? n.USE_PROFILES : !1, Rt = n.ALLOW_ARIA_ATTR !== !1, Ze = n.ALLOW_DATA_ATTR !== !1, Ct = n.ALLOW_UNKNOWN_PROTOCOLS || !1, kt = n.ALLOW_SELF_CLOSE_IN_ATTR !== !1, ce = n.SAFE_FOR_TEMPLATES || !1, Me = n.SAFE_FOR_XML !== !1, ie = n.WHOLE_DOCUMENT || !1, ue = n.RETURN_DOM || !1, xe = n.RETURN_DOM_FRAGMENT || !1, Fe = n.RETURN_TRUSTED_TYPE || !1, Qe = n.FORCE_BODY || !1, Mt = n.SANITIZE_DOM !== !1, xt = n.SANITIZE_NAMED_PROPS || !1, et = n.KEEP_CONTENT !== !1, Te = n.IN_PLACE || !1, Dt = n.ALLOWED_URI_REGEXP || Ii, de = n.NAMESPACE || J, He = n.MATHML_TEXT_INTEGRATION_POINTS || He, Ge = n.HTML_INTEGRATION_POINTS || Ge, S = n.CUSTOM_ELEMENT_HANDLING || {}, n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (S.tagNameCheck = n.CUSTOM_ELEMENT_HANDLING.tagNameCheck), n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (S.attributeNameCheck = n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), n.CUSTOM_ELEMENT_HANDLING && typeof n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (S.allowCustomizedBuiltInElements = n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), ce && (Ze = !1), xe && (ue = !0), he && (O = m({}, pi), I = [], he.html === !0 && (m(O, fi), m(I, mi)), he.svg === !0 && (m(O, ft), m(I, gt), m(I, Be)), he.svgFilters === !0 && (m(O, pt), m(I, gt), m(I, Be)), he.mathMl === !0 && (m(O, mt), m(I, gi), m(I, Be))), n.ADD_TAGS && (typeof n.ADD_TAGS == "function" ? le.tagCheck = n.ADD_TAGS : (O === Pt && (O = K(O)), m(O, n.ADD_TAGS, w))), n.ADD_ATTR && (typeof n.ADD_ATTR == "function" ? le.attributeCheck = n.ADD_ATTR : (I === Lt && (I = K(I)), m(I, n.ADD_ATTR, w))), n.ADD_URI_SAFE_ATTR && m(it, n.ADD_URI_SAFE_ATTR, w), n.FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.FORBID_CONTENTS, w)), n.ADD_FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.ADD_FORBID_CONTENTS, w)), et && (O["#text"] = !0), ie && m(O, ["html", "head", "body"]), O.table && (m(O, ["tbody"]), delete ye.tbody), n.TRUSTED_TYPES_POLICY) {
+      Mi.indexOf(n.PARSER_MEDIA_TYPE) === -1 ? xi : n.PARSER_MEDIA_TYPE, w = Se === "application/xhtml+xml" ? ht : je, O = W(n, "ALLOWED_TAGS") ? m({}, n.ALLOWED_TAGS, w) : Pt, I = W(n, "ALLOWED_ATTR") ? m({}, n.ALLOWED_ATTR, w) : Lt, nt = W(n, "ALLOWED_NAMESPACES") ? m({}, n.ALLOWED_NAMESPACES, ht) : Ci, it = W(n, "ADD_URI_SAFE_ATTR") ? m(K(Ut), n.ADD_URI_SAFE_ATTR, w) : Ut, Ft = W(n, "ADD_DATA_URI_TAGS") ? m(K(zt), n.ADD_DATA_URI_TAGS, w) : zt, j = W(n, "FORBID_CONTENTS") ? m({}, n.FORBID_CONTENTS, w) : tt, ye = W(n, "FORBID_TAGS") ? m({}, n.FORBID_TAGS, w) : K({}), Ke = W(n, "FORBID_ATTR") ? m({}, n.FORBID_ATTR, w) : K({}), he = W(n, "USE_PROFILES") ? n.USE_PROFILES : !1, Rt = n.ALLOW_ARIA_ATTR !== !1, Ze = n.ALLOW_DATA_ATTR !== !1, Ct = n.ALLOW_UNKNOWN_PROTOCOLS || !1, kt = n.ALLOW_SELF_CLOSE_IN_ATTR !== !1, ce = n.SAFE_FOR_TEMPLATES || !1, Me = n.SAFE_FOR_XML !== !1, ie = n.WHOLE_DOCUMENT || !1, ue = n.RETURN_DOM || !1, xe = n.RETURN_DOM_FRAGMENT || !1, Fe = n.RETURN_TRUSTED_TYPE || !1, Qe = n.FORCE_BODY || !1, Mt = n.SANITIZE_DOM !== !1, xt = n.SANITIZE_NAMED_PROPS || !1, et = n.KEEP_CONTENT !== !1, Te = n.IN_PLACE || !1, Dt = n.ALLOWED_URI_REGEXP || Ii, de = n.NAMESPACE || J, He = n.MATHML_TEXT_INTEGRATION_POINTS || He, Ve = n.HTML_INTEGRATION_POINTS || Ve, S = n.CUSTOM_ELEMENT_HANDLING || {}, n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (S.tagNameCheck = n.CUSTOM_ELEMENT_HANDLING.tagNameCheck), n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (S.attributeNameCheck = n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), n.CUSTOM_ELEMENT_HANDLING && typeof n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (S.allowCustomizedBuiltInElements = n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), ce && (Ze = !1), xe && (ue = !0), he && (O = m({}, pi), I = [], he.html === !0 && (m(O, fi), m(I, mi)), he.svg === !0 && (m(O, ft), m(I, gt), m(I, Be)), he.svgFilters === !0 && (m(O, pt), m(I, gt), m(I, Be)), he.mathMl === !0 && (m(O, mt), m(I, gi), m(I, Be))), n.ADD_TAGS && (typeof n.ADD_TAGS == "function" ? le.tagCheck = n.ADD_TAGS : (O === Pt && (O = K(O)), m(O, n.ADD_TAGS, w))), n.ADD_ATTR && (typeof n.ADD_ATTR == "function" ? le.attributeCheck = n.ADD_ATTR : (I === Lt && (I = K(I)), m(I, n.ADD_ATTR, w))), n.ADD_URI_SAFE_ATTR && m(it, n.ADD_URI_SAFE_ATTR, w), n.FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.FORBID_CONTENTS, w)), n.ADD_FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.ADD_FORBID_CONTENTS, w)), et && (O["#text"] = !0), ie && m(O, ["html", "head", "body"]), O.table && (m(O, ["tbody"]), delete ye.tbody), n.TRUSTED_TYPES_POLICY) {
         if (typeof n.TRUSTED_TYPES_POLICY.createHTML != "function")
           throw be('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
         if (typeof n.TRUSTED_TYPES_POLICY.createScriptURL != "function")
@@ -1489,14 +1489,14 @@ function Pi() {
         b === void 0 && (b = $s(N, r)), b !== null && typeof $ == "string" && ($ = b.createHTML(""));
       k && k(n), fe = n;
     }
-  }, Gt = m({}, [...ft, ...pt, ...Cs]), Vt = m({}, [...mt, ...ks]), zi = function(n) {
+  }, Vt = m({}, [...ft, ...pt, ...Cs]), Gt = m({}, [...mt, ...ks]), zi = function(n) {
     let a = oe(n);
     (!a || !a.tagName) && (a = {
       namespaceURI: de,
       tagName: "template"
     });
     const u = je(n.tagName), y = je(a.tagName);
-    return nt[n.namespaceURI] ? n.namespaceURI === Ue ? a.namespaceURI === J ? u === "svg" : a.namespaceURI === ze ? u === "svg" && (y === "annotation-xml" || He[y]) : !!Gt[u] : n.namespaceURI === ze ? a.namespaceURI === J ? u === "math" : a.namespaceURI === Ue ? u === "math" && Ge[y] : !!Vt[u] : n.namespaceURI === J ? a.namespaceURI === Ue && !Ge[y] || a.namespaceURI === ze && !He[y] ? !1 : !Vt[u] && (ki[u] || !Gt[u]) : !!(Se === "application/xhtml+xml" && nt[n.namespaceURI]) : !1;
+    return nt[n.namespaceURI] ? n.namespaceURI === Ue ? a.namespaceURI === J ? u === "svg" : a.namespaceURI === ze ? u === "svg" && (y === "annotation-xml" || He[y]) : !!Vt[u] : n.namespaceURI === ze ? a.namespaceURI === J ? u === "math" : a.namespaceURI === Ue ? u === "math" && Ve[y] : !!Gt[u] : n.namespaceURI === J ? a.namespaceURI === Ue && !Ve[y] || a.namespaceURI === ze && !He[y] ? !1 : !Gt[u] && (ki[u] || !Vt[u]) : !!(Se === "application/xhtml+xml" && nt[n.namespaceURI]) : !1;
   }, Y = function(n) {
     Ae(e.removed, {
       element: n
@@ -1850,13 +1850,13 @@ const Zs = /* @__PURE__ */ Li(js, [["render", Ks]]), Js = {
     method: { type: String, default: "flickr.photos.search" },
     photosetId: { type: String, default: "" },
     tags: { type: String, default: "" },
-    extras: { type: String, default: "" }
+    extras: { type: String, default: "" },
+    perPage: { type: Number, default: 18 }
   },
   data: () => ({
     galleryID: "flickr",
     endpoint: "https://www.flickr.com/services/rest/",
     page: 1,
-    perPage: 18,
     totalPictures: 0,
     totalPages: 0,
     defaultExtras: "url_m,url_l,owner_name,description",
@@ -1910,9 +1910,11 @@ const Zs = /* @__PURE__ */ Li(js, [["render", Ks]]), Js = {
       this.loading = !0;
       try {
         const s = new URLSearchParams();
-        s.set("method", this.method), s.set("api_key", this.apiKey), this.tags && s.set("tags", this.tags), this.userId && s.set("user_id", this.userId), this.photosetId && s.set("photoset_id", this.photosetId), s.set("format", "json"), s.set("page", String(this.page)), s.set("per_page", String(this.perPage)), s.set("extras", this.defaultExtras), s.set("nojsoncallback", "1");
-        const e = `${this.endpoint}?${s.toString()}`;
-        await this.flickrStore.fetchPhotos(e), this.totalPages = this.flickrStore.totalPages, this.totalPictures = this.flickrStore.totalPictures, this.loading = this.flickrStore.loading;
+        s.set("method", this.method), s.set("api_key", this.apiKey), this.tags && s.set("tags", this.tags), this.userId && s.set("user_id", this.userId), this.photosetId && s.set("photoset_id", this.photosetId), s.set("format", "json"), s.set("page", String(this.page));
+        const e = Number.isFinite(this.perPage) && this.perPage > 0 ? Math.min(this.perPage, 500) : 18;
+        s.set("per_page", String(e)), s.set("extras", this.defaultExtras), s.set("nojsoncallback", "1");
+        const i = `${this.endpoint}?${s.toString()}`;
+        await this.flickrStore.fetchPhotos(i), this.totalPages = this.flickrStore.totalPages, this.totalPictures = this.flickrStore.totalPictures, this.loading = this.flickrStore.loading;
       } catch (s) {
         console.error("Fehler beim Laden der Flickr-Fotos:", s), this.loading = !1;
       }
@@ -1952,10 +1954,10 @@ function hn(s, e, i, t, r, o) {
     ei(qi, { name: "fade" }, {
       default: Ki(() => [
         H("div", en, [
-          i.title ? (X(), q("h2", tn, Ve(i.title), 1)) : ct("", !0),
+          i.title ? (X(), q("h2", tn, Ge(i.title), 1)) : ct("", !0),
           s.flickrStore.error ? (X(), q("div", sn, [
             e[5] || (e[5] = H("strong", null, "Fehler:", -1)),
-            Zi(" " + Ve(s.flickrStore.error) + " ", 1),
+            Zi(" " + Ge(s.flickrStore.error) + " ", 1),
             H("button", {
               class: "flickr-retry",
               onClick: e[0] || (e[0] = (...f) => o.loadFlickrPhotos && o.loadFlickrPhotos(...f)),
@@ -1987,7 +1989,7 @@ function hn(s, e, i, t, r, o) {
         }, " << ", 32)
       ]),
       i.showPage ? (X(), q("span", ln, [
-        H("span", cn, "Page " + Ve(s.page) + "/" + Ve(s.totalPages), 1)
+        H("span", cn, "Page " + Ge(s.page) + "/" + Ge(s.totalPages), 1)
       ])) : ct("", !0),
       H("span", un, [
         H("button", {

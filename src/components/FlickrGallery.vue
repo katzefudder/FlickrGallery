@@ -66,12 +66,12 @@ export default {
     photosetId: { type: String, default: '' },
     tags: { type: String, default: '' },
     extras: { type: String, default: '' },
+    perPage: { type: Number, default: 18 },
   },
   data: () => ({
     galleryID: "flickr",
     endpoint: "https://www.flickr.com/services/rest/",
     page: 1,
-    perPage: 18,
     totalPictures: 0,
     totalPages: 0,
     defaultExtras: 'url_m,url_l,owner_name,description', // https://www.flickr.com/services/api/flickr.photos.search.html
@@ -149,7 +149,8 @@ this.lightbox = lightbox;
         if (this.photosetId) params.set('photoset_id', this.photosetId);
         params.set('format', 'json');
         params.set('page', String(this.page));
-        params.set('per_page', String(this.perPage));
+        const perPageVal = Number.isFinite(this.perPage) && this.perPage > 0 ? Math.min(this.perPage, 500) : 18;
+        params.set('per_page', String(perPageVal));
         params.set('extras', this.defaultExtras);
         params.set('nojsoncallback', '1');
         const url = `${this.endpoint}?${params.toString()}`;
