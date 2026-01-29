@@ -1213,7 +1213,7 @@ function vs(s = "default") {
             throw new Error(`HTTP ${r.status}`);
           const o = await r.json();
           if (o != null && o.stat && o.stat !== "ok")
-            throw new Error(o != null && o.message ? `Flickr: ${o.message}` : "Flickr API Fehler");
+            throw new Error(o != null && o.message ? `Flickr: ${o.message}` : "Flickr API Error");
           o != null && o.photos ? (this.photos = Array.isArray(o.photos.photo) ? o.photos.photo : [], this.totalPages = Number(o.photos.pages || 0), this.totalPictures = Number(o.photos.total || 0)) : o != null && o.photoset ? (this.photos = Array.isArray(o.photoset.photo) ? o.photoset.photo : [], this.totalPages = Number(o.photoset.pages || 0), this.totalPictures = Number(o.photoset.total || 0)) : (this.photos = [], this.totalPages = 0, this.totalPictures = 0, console.error("Unerwartete Flickr API Antwortstruktur", o));
         } catch (r) {
           console.error("Fehler beim Laden der Flickr-Fotos im Store:", r), this.error = (r == null ? void 0 : r.message) || String(r), this.photos = [], this.totalPages = 0, this.totalPictures = 0;
