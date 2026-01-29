@@ -1,6 +1,6 @@
 <template>
   <!-- Image begin -->
-  <a
+  <a v-if="enableLightbox"
       class="pswp-gallery__item"
       :href="image.url_l || image.url_m"
       :data-pswp-width="image.width_l || image.width_m"
@@ -22,6 +22,21 @@
         }"
     />
   </a>
+  <div v-else>
+    <span class="hidden-caption-content" v-html="sanitizedDescription"></span>
+    <img
+         :src="image.url_m || image.url_l"
+         :alt="image.title"
+         @mouseover="enlargeImage"
+         @mouseout="shrinkImage"
+         loading="lazy"
+         decoding="async"
+         :class="{
+          'img-default-size': true,
+          'img-enlarged-size': imageEnlarged,
+        }"
+    />
+  </div>
   <!-- Image end -->
 </template>
 
@@ -33,7 +48,8 @@ export default {
     image: {
       type: Object,
       required: true
-    }
+    },
+    enableLightbox: { type: Boolean, default: true }
   },
   data() {
     return {

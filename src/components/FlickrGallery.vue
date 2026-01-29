@@ -14,7 +14,7 @@
             </div>
             <div v-else class="flickr-images">
               <span v-for="(image, idx) in flickrStore.photos" :key="image.id ?? idx">
-                <Image :image="image"></Image>
+                <Image :image="image" :enableLightbox="enableLightbox"></Image>
               </span>
             </div>
         </div>
@@ -66,6 +66,7 @@ export default {
     extras: { type: String, default: '' },
     perPage: { type: Number, default: 18 },
     importCss: { type: Boolean, default: true },
+    enableLightbox: { type: Boolean, default: true },
   },
   data: () => ({
     galleryID: "flickr",
@@ -81,12 +82,14 @@ export default {
     const uid = 'flickr-' + this.$.uid;
     this.galleryID = this.galleryID + "-" + this.$.uid;
     this.flickrStore = useFlickrStore(uid);
+    console.debug('importiere css:', this.importCss);
     if (this.importCss) {
       try {
-        await Promise.all([
-          import('photoswipe/style.css'),
-          import('../assets/flickrgallery.css')
-        ]);
+        const cssImports = [import('../assets/flickrgallery.css')];
+        if (this.enableLightbox) {
+          cssImports.push(import('photoswipe/style.css'));
+        }
+        await Promise.all(cssImports);
       } catch (e) {
         console.error('CSS konnte nicht geladen werden:', e);
       }
@@ -97,7 +100,9 @@ export default {
     await this.loadFlickrPhotos();
   },
   mounted() {
-    this.initLightbox();
+    if (this.enableLightbox) {
+      this.initLightbox();
+    }
   },
   watch: {
 
