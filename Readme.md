@@ -34,6 +34,7 @@ App.vue
             method="flickr.photos.search"
             extras="url_m,url_l,owner_name"
             per-page="24"
+            :import-css="true"
         />
 </template>
 
@@ -44,3 +45,10 @@ App.vue
 
 Notes
 - `per-page` (Number, default: 18) steuert die pro Seite geladenen Bilder. Maximal werden 500 akzeptiert.
+- `import-css` (Boolean, default: `true`) lädt die benötigten Styles dynamisch. Setze `false`, wenn du die Styles manuell importieren möchtest (z. B. in deinem App-Entry):
+  
+    ```js
+    import 'photoswipe/style.css'
+    import 'flickrgallery/dist/style.css'
+    // oder direkt: import 'flickrgallery/dist/flickrgallery.css'
+    ```

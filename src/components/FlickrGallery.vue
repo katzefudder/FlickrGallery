@@ -48,8 +48,6 @@
 
 <script>
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-import '../assets/flickrgallery.css'
 import { useFlickrStore } from '../stores/flickr';
 import Image from "./Image.vue";
 
@@ -67,6 +65,7 @@ export default {
     tags: { type: String, default: '' },
     extras: { type: String, default: '' },
     perPage: { type: Number, default: 18 },
+    importCss: { type: Boolean, default: true },
   },
   data: () => ({
     galleryID: "flickr",
@@ -82,6 +81,16 @@ export default {
     const uid = 'flickr-' + this.$.uid;
     this.galleryID = this.galleryID + "-" + this.$.uid;
     this.flickrStore = useFlickrStore(uid);
+    if (this.importCss) {
+      try {
+        await Promise.all([
+          import('photoswipe/style.css'),
+          import('../assets/flickrgallery.css')
+        ]);
+      } catch (e) {
+        console.error('CSS konnte nicht geladen werden:', e);
+      }
+    }
     if (this.extras) {
       this.defaultExtras = this.extras;
     }

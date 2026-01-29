@@ -1,4 +1,4 @@
-import { hasInjectionContext as _t, inject as Et, getCurrentInstance as Hi, ref as yi, reactive as Vi, markRaw as Oe, effectScope as Gi, isRef as Le, isReactive as Nt, toRef as lt, toRaw as Wi, nextTick as Jt, getCurrentScope as $i, onScopeDispose as Bi, watch as ji, computed as Ti, toRefs as Qt, openBlock as X, createElementBlock as q, createElementVNode as H, normalizeClass as Yi, resolveComponent as Xi, createVNode as ei, Transition as qi, withCtx as Ki, toDisplayString as Ge, createCommentVNode as ct, createTextVNode as Zi, Fragment as Ji, renderList as Qi, withKeys as ti, defineAsyncComponent as es } from "vue";
+import { hasInjectionContext as _t, inject as Et, getCurrentInstance as Hi, ref as yi, reactive as Vi, markRaw as Oe, effectScope as Gi, isRef as Ce, isReactive as Nt, toRef as lt, toRaw as Wi, nextTick as Jt, getCurrentScope as $i, onScopeDispose as Bi, watch as ji, computed as Si, toRefs as Qt, openBlock as X, createElementBlock as q, createElementVNode as H, normalizeClass as Yi, resolveComponent as Xi, createVNode as ei, Transition as qi, withCtx as Ki, toDisplayString as Ge, createCommentVNode as ct, createTextVNode as Zi, Fragment as Ji, renderList as Qi, withKeys as ti, defineAsyncComponent as es } from "vue";
 /*!
  * pinia v3.0.4
  * (c) 2025 Eduardo San Martin Morote
@@ -6,7 +6,7 @@ import { hasInjectionContext as _t, inject as Et, getCurrentInstance as Hi, ref 
  */
 const ge = typeof window < "u";
 let ne;
-const Re = (s) => ne = s;
+const Le = (s) => ne = s;
 process.env.NODE_ENV;
 const yt = process.env.NODE_ENV !== "production" ? Symbol("pinia") : (
   /* istanbul ignore next */
@@ -19,13 +19,13 @@ var Pe;
 (function(s) {
   s.direct = "direct", s.patchObject = "patch object", s.patchFunction = "patch function";
 })(Pe || (Pe = {}));
-function Si(s, e) {
+function Ti(s, e) {
   for (const i in e) {
     const t = e[i];
     if (!(i in s))
       continue;
     const r = s[i];
-    re(r) && re(t) && !Le(t) && !Nt(t) ? s[i] = Si(r, t) : s[i] = t;
+    re(r) && re(t) && !Ce(t) && !Nt(t) ? s[i] = Ti(r, t) : s[i] = t;
   }
   return s;
 }
@@ -44,13 +44,13 @@ function me(s, ...e) {
   });
 }
 const ts = (s) => s(), si = Symbol(), ut = Symbol();
-function Tt(s, e) {
+function St(s, e) {
   s instanceof Map && e instanceof Map ? e.forEach((i, t) => s.set(t, i)) : s instanceof Set && e instanceof Set && e.forEach(s.add, s);
   for (const i in e) {
     if (!e.hasOwnProperty(i))
       continue;
     const t = e[i], r = s[i];
-    re(r) && re(t) && s.hasOwnProperty(i) && !Le(t) && !Nt(t) ? s[i] = Tt(r, t) : s[i] = t;
+    re(r) && re(t) && s.hasOwnProperty(i) && !Ce(t) && !Nt(t) ? s[i] = St(r, t) : s[i] = t;
   }
   return s;
 }
@@ -63,26 +63,26 @@ function ss(s) {
 }
 const { assign: V } = Object;
 function ni(s) {
-  return !!(Le(s) && s.effect);
+  return !!(Ce(s) && s.effect);
 }
 function ri(s, e, i, t) {
   const { state: r, actions: o, getters: c } = e, f = i.state.value[s];
   let E;
   function _() {
     !f && (process.env.NODE_ENV === "production" || !t) && (i.state.value[s] = r ? r() : {});
-    const T = process.env.NODE_ENV !== "production" && t ? (
+    const S = process.env.NODE_ENV !== "production" && t ? (
       // use ref() to unwrap refs inside state TODO: check if this is still necessary
       Qt(yi(r ? r() : {}).value)
     ) : Qt(i.state.value[s]);
-    return V(T, o, Object.keys(c || {}).reduce((v, R) => (process.env.NODE_ENV !== "production" && R in T && console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${R}" in store "${s}".`), v[R] = Oe(Ti(() => {
-      Re(i);
+    return V(S, o, Object.keys(c || {}).reduce((v, L) => (process.env.NODE_ENV !== "production" && L in S && console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${L}" in store "${s}".`), v[L] = Oe(Si(() => {
+      Le(i);
       const N = i._s.get(s);
-      return c[R].call(N, N);
+      return c[L].call(N, N);
     })), v), {}));
   }
-  return E = St(s, _, e, i, t, !0), E;
+  return E = Tt(s, _, e, i, t, !0), E;
 }
-function St(s, e, i = {}, t, r, o) {
+function Tt(s, e, i = {}, t, r, o) {
   let c;
   const f = V({ actions: {} }, i);
   if (process.env.NODE_ENV !== "production" && !t._e.active)
@@ -91,27 +91,27 @@ function St(s, e, i = {}, t, r, o) {
   process.env.NODE_ENV !== "production" && (E.onTrigger = (h) => {
     _ ? N = h : _ == !1 && !p._hotUpdating && (Array.isArray(N) ? N.push(h) : console.error("🍍 debuggerEvents should be an array. This is most likely an internal Pinia bug."));
   });
-  let _, T, v = /* @__PURE__ */ new Set(), R = /* @__PURE__ */ new Set(), N;
+  let _, S, v = /* @__PURE__ */ new Set(), L = /* @__PURE__ */ new Set(), N;
   const x = t.state.value[s];
   !o && !x && (process.env.NODE_ENV === "production" || !r) && (t.state.value[s] = {});
   const _e = yi({});
-  let Ce;
+  let Re;
   function ke(h) {
     let l;
-    _ = T = !1, process.env.NODE_ENV !== "production" && (N = []), typeof h == "function" ? (h(t.state.value[s]), l = {
+    _ = S = !1, process.env.NODE_ENV !== "production" && (N = []), typeof h == "function" ? (h(t.state.value[s]), l = {
       type: Pe.patchFunction,
       storeId: s,
       events: N
-    }) : (Tt(t.state.value[s], h), l = {
+    }) : (St(t.state.value[s], h), l = {
       type: Pe.patchObject,
       payload: h,
       storeId: s,
       events: N
     });
-    const g = Ce = Symbol();
+    const g = Re = Symbol();
     Jt().then(() => {
-      Ce === g && (_ = !0);
-    }), T = !0, me(v, l, t.state.value[s]);
+      Re === g && (_ = !0);
+    }), S = !0, me(v, l, t.state.value[s]);
   }
   const Ye = o ? function() {
     const { state: l } = i, g = l ? l() : {};
@@ -125,13 +125,13 @@ function St(s, e, i = {}, t, r, o) {
     } : Ai
   );
   function oe() {
-    c.stop(), v.clear(), R.clear(), t._s.delete(s);
+    c.stop(), v.clear(), L.clear(), t._s.delete(s);
   }
   const b = (h, l = "") => {
     if (si in h)
       return h[ut] = l, h;
     const g = function() {
-      Re(t);
+      Le(t);
       const P = Array.from(arguments), Z = /* @__PURE__ */ new Set(), Ee = /* @__PURE__ */ new Set();
       function Xe(F) {
         Z.add(F);
@@ -139,7 +139,7 @@ function St(s, e, i = {}, t, r, o) {
       function qe(F) {
         Ee.add(F);
       }
-      me(R, {
+      me(L, {
         args: P,
         name: g[ut],
         store: p,
@@ -164,12 +164,12 @@ function St(s, e, i = {}, t, r, o) {
     _p: t,
     // _s: scope,
     $id: s,
-    $onAction: ii.bind(null, R),
+    $onAction: ii.bind(null, L),
     $patch: ke,
     $reset: Ye,
     $subscribe(h, l = {}) {
       const g = ii(v, h, l.detached, () => P()), P = c.run(() => ji(() => t.state.value[s], (Z) => {
-        (l.flush === "sync" ? T : _) && h({
+        (l.flush === "sync" ? S : _) && h({
           storeId: s,
           type: Pe.direct,
           events: N
@@ -192,8 +192,8 @@ function St(s, e, i = {}, t, r, o) {
   const B = (t._a && t._a.runWithContext || ts)(() => t._e.run(() => (c = Gi()).run(() => e({ action: b }))));
   for (const h in B) {
     const l = B[h];
-    if (Le(l) && !ni(l) || Nt(l))
-      process.env.NODE_ENV !== "production" && r ? _e.value[h] = lt(B, h) : o || (x && ss(l) && (Le(l) ? l.value = x[h] : Tt(l, x[h])), t.state.value[s][h] = l), process.env.NODE_ENV !== "production" && $.state.push(h);
+    if (Ce(l) && !ni(l) || Nt(l))
+      process.env.NODE_ENV !== "production" && r ? _e.value[h] = lt(B, h) : o || (x && ss(l) && (Ce(l) ? l.value = x[h] : St(l, x[h])), t.state.value[s][h] = l), process.env.NODE_ENV !== "production" && $.state.push(h);
     else if (typeof l == "function") {
       const g = process.env.NODE_ENV !== "production" && r ? l : b(l, h);
       B[h] = g, process.env.NODE_ENV !== "production" && ($.actions[h] = l), f.actions[h] = l;
@@ -216,12 +216,12 @@ function St(s, e, i = {}, t, r, o) {
     p._hotUpdating = !0, h._hmrPayload.state.forEach((l) => {
       if (l in p.$state) {
         const g = h.$state[l], P = p.$state[l];
-        typeof g == "object" && re(g) && re(P) ? Si(g, P) : h.$state[l] = P;
+        typeof g == "object" && re(g) && re(P) ? Ti(g, P) : h.$state[l] = P;
       }
       p[l] = lt(h.$state, l);
     }), Object.keys(p.$state).forEach((l) => {
       l in h.$state || delete p[l];
-    }), _ = !1, T = !1, t.state.value[s] = lt(h._hmrPayload, "hotState"), T = !0, Jt().then(() => {
+    }), _ = !1, S = !1, t.state.value[s] = lt(h._hmrPayload, "hotState"), S = !0, Jt().then(() => {
       _ = !0;
     });
     for (const l in h._hmrPayload.actions) {
@@ -232,7 +232,7 @@ function St(s, e, i = {}, t, r, o) {
     for (const l in h._hmrPayload.getters) {
       const g = h._hmrPayload.getters[l], P = o ? (
         // special handling of options api
-        Ti(() => (Re(t), g.call(p, p)))
+        Si(() => (Le(t), g.call(p, p)))
       ) : g;
       p[l] = //
       P;
@@ -271,7 +271,7 @@ function St(s, e, i = {}, t, r, o) {
       })));
   }), process.env.NODE_ENV !== "production" && p.$state && typeof p.$state == "object" && typeof p.$state.constructor == "function" && !p.$state.constructor.toString().includes("[native code]") && console.warn(`[🍍]: The "state" must be a plain object. It cannot be
 	state: () => new MyClass()
-Found in store "${p.$id}".`), x && o && i.hydrate && i.hydrate(p.$state, x), _ = !0, T = !0, p;
+Found in store "${p.$id}".`), x && o && i.hydrate && i.hydrate(p.$state, x), _ = !0, S = !0, p;
 }
 /*! #__NO_SIDE_EFFECTS__ */
 // @__NO_SIDE_EFFECTS__
@@ -283,22 +283,22 @@ function ns(s, e, i) {
     const E = _t();
     if (c = // in test mode, ignore the argument provided as we can always retrieve a
     // pinia instance with getActivePinia()
-    (process.env.NODE_ENV === "test" && ne && ne._testing ? null : c) || (E ? Et(yt, null) : null), c && Re(c), process.env.NODE_ENV !== "production" && !ne)
+    (process.env.NODE_ENV === "test" && ne && ne._testing ? null : c) || (E ? Et(yt, null) : null), c && Le(c), process.env.NODE_ENV !== "production" && !ne)
       throw new Error(`[🍍]: "getActivePinia()" was called but there was no active Pinia. Are you trying to use a store before calling "app.use(pinia)"?
 See https://pinia.vuejs.org/core-concepts/outside-component-usage.html for help.
 This will fail in production.`);
-    c = ne, c._s.has(s) || (r ? St(s, e, t, c) : ri(s, t, c), process.env.NODE_ENV !== "production" && (o._pinia = c));
+    c = ne, c._s.has(s) || (r ? Tt(s, e, t, c) : ri(s, t, c), process.env.NODE_ENV !== "production" && (o._pinia = c));
     const _ = c._s.get(s);
     if (process.env.NODE_ENV !== "production" && f) {
-      const T = "__hot:" + s, v = r ? St(T, e, t, c, !0) : ri(T, V({}, t), c, !0);
-      f._hotUpdate(v), delete c.state.value[T], c._s.delete(T);
+      const S = "__hot:" + s, v = r ? Tt(S, e, t, c, !0) : ri(S, V({}, t), c, !0);
+      f._hotUpdate(v), delete c.state.value[S], c._s.delete(S);
     }
     if (process.env.NODE_ENV !== "production" && ge) {
-      const T = Hi();
-      if (T && T.proxy && // avoid adding stores that are just built for hot module replacement
+      const S = Hi();
+      if (S && S.proxy && // avoid adding stores that are just built for hot module replacement
       !f) {
-        const v = T.proxy, R = "_pStores" in v ? v._pStores : v._pStores = {};
-        R[s] = _;
+        const v = S.proxy, L = "_pStores" in v ? v._pStores : v._pStores = {};
+        L[s] = _;
       }
     }
     return _;
@@ -306,7 +306,7 @@ This will fail in production.`);
   return o.$id = s, o;
 }
 function rs(s) {
-  Re(s);
+  Le(s);
 }
 function os(s, e) {
   if (s == null) return;
@@ -346,15 +346,15 @@ function bi(s, e) {
 function wi(s, e) {
   return e.map((i) => i.split(".")).reduce((i, t) => vi(i, t), s);
 }
-function oi(s, { storage: e, serializer: i, key: t, debug: r, pick: o, omit: c, beforeHydrate: f, afterHydrate: E }, _, T = !0) {
+function oi(s, { storage: e, serializer: i, key: t, debug: r, pick: o, omit: c, beforeHydrate: f, afterHydrate: E }, _, S = !0) {
   try {
-    T && (f == null || f(_));
+    S && (f == null || f(_));
     const v = e.getItem(t);
     if (v) {
-      const R = i.deserialize(v), N = o ? bi(R, o) : R, x = c ? wi(N, c) : N;
+      const L = i.deserialize(v), N = o ? bi(L, o) : L, x = c ? wi(N, c) : N;
       s.$patch(x);
     }
-    T && (E == null || E(_));
+    S && (E == null || E(_));
   } catch (v) {
     r && console.error("[pinia-plugin-persistedstate]", v);
   }
@@ -942,7 +942,7 @@ function Ni(s, e, i) {
   }
   return t.lazyLoad(), r && t.setDisplayedSize(Math.ceil(t.width * r.initial), Math.ceil(t.height * r.initial)), t;
 }
-function Ts(s, e) {
+function Ss(s, e) {
   const i = e.getItemData(s);
   if (!e.dispatch("lazyLoadSlide", {
     index: s,
@@ -950,7 +950,7 @@ function Ts(s, e) {
   }).defaultPrevented)
     return Ni(i, e, s);
 }
-class Ss extends ps {
+class Ts extends ps {
   /**
    * Get total number of slides
    *
@@ -1044,7 +1044,7 @@ class Ss extends ps {
     return Ni(e, this, i);
   }
 }
-class As extends Ss {
+class As extends Ts {
   /**
    * @param {PhotoSwipeOptions} [options]
    */
@@ -1148,7 +1148,7 @@ class As extends Ss {
       else
         throw new Error("pswpModule is not valid");
     }
-    typeof t.openPromise == "function" && r.push(t.openPromise()), t.preloadFirstSlide !== !1 && e >= 0 && (this._preloadedContent = Ts(e, this));
+    typeof t.openPromise == "function" && r.push(t.openPromise()), t.preloadFirstSlide !== !1 && e >= 0 && (this._preloadedContent = Ss(e, this));
     const c = ++this._uid;
     Promise.all(r).then((f) => {
       if (this.shouldOpen) {
@@ -1256,7 +1256,7 @@ wt || (wt = function(e) {
     t[r - 1] = arguments[r];
   return new e(...t);
 });
-const $e = M(Array.prototype.forEach), Os = M(Array.prototype.lastIndexOf), di = M(Array.prototype.pop), Ae = M(Array.prototype.push), Is = M(Array.prototype.splice), je = M(String.prototype.toLowerCase), ht = M(String.prototype.toString), dt = M(String.prototype.match), ve = M(String.prototype.replace), Ds = M(String.prototype.indexOf), Ps = M(String.prototype.trim), W = M(Object.prototype.hasOwnProperty), C = M(RegExp.prototype.test), be = Ls(TypeError);
+const $e = M(Array.prototype.forEach), Os = M(Array.prototype.lastIndexOf), di = M(Array.prototype.pop), Ae = M(Array.prototype.push), Is = M(Array.prototype.splice), je = M(String.prototype.toLowerCase), ht = M(String.prototype.toString), dt = M(String.prototype.match), ve = M(String.prototype.replace), Ds = M(String.prototype.indexOf), Ps = M(String.prototype.trim), W = M(Object.prototype.hasOwnProperty), R = M(RegExp.prototype.test), be = Cs(TypeError);
 function M(s) {
   return function(e) {
     e instanceof RegExp && (e.lastIndex = 0);
@@ -1265,7 +1265,7 @@ function M(s) {
     return bt(s, e, t);
   };
 }
-function Ls(s) {
+function Cs(s) {
   return function() {
     for (var e = arguments.length, i = new Array(e), t = 0; t < e; t++)
       i[t] = arguments[t];
@@ -1286,7 +1286,7 @@ function m(s, e) {
   }
   return s;
 }
-function Rs(s) {
+function Ls(s) {
   for (let e = 0; e < s.length; e++)
     W(s, e) || (s[e] = null);
   return s;
@@ -1294,7 +1294,7 @@ function Rs(s) {
 function K(s) {
   const e = vt(null);
   for (const [i, t] of Oi(s))
-    W(s, i) && (Array.isArray(t) ? e[i] = Rs(t) : t && typeof t == "object" && t.constructor === Object ? e[i] = K(t) : e[i] = t);
+    W(s, i) && (Array.isArray(t) ? e[i] = Ls(t) : t && typeof t == "object" && t.constructor === Object ? e[i] = K(t) : e[i] = t);
   return e;
 }
 function we(s, e) {
@@ -1313,7 +1313,7 @@ function we(s, e) {
   }
   return i;
 }
-const fi = k(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]), ft = k(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]), pt = k(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]), Cs = k(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]), mt = k(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]), ks = k(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]), pi = k(["#text"]), mi = k(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]), gt = k(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]), gi = k(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]), Be = k(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]), Ms = G(/\{\{[\w\W]*|[\w\W]*\}\}/gm), xs = G(/<%[\w\W]*|[\w\W]*%>/gm), Fs = G(/\$\{[\w\W]*/gm), zs = G(/^data-[\-\w.\u00B7-\uFFFF]+$/), Us = G(/^aria-[\-\w]+$/), Ii = G(
+const fi = k(["a", "abbr", "acronym", "address", "area", "article", "aside", "audio", "b", "bdi", "bdo", "big", "blink", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "content", "data", "datalist", "dd", "decorator", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "element", "em", "fieldset", "figcaption", "figure", "font", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "img", "input", "ins", "kbd", "label", "legend", "li", "main", "map", "mark", "marquee", "menu", "menuitem", "meter", "nav", "nobr", "ol", "optgroup", "option", "output", "p", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "search", "section", "select", "shadow", "slot", "small", "source", "spacer", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]), ft = k(["svg", "a", "altglyph", "altglyphdef", "altglyphitem", "animatecolor", "animatemotion", "animatetransform", "circle", "clippath", "defs", "desc", "ellipse", "enterkeyhint", "exportparts", "filter", "font", "g", "glyph", "glyphref", "hkern", "image", "inputmode", "line", "lineargradient", "marker", "mask", "metadata", "mpath", "part", "path", "pattern", "polygon", "polyline", "radialgradient", "rect", "stop", "style", "switch", "symbol", "text", "textpath", "title", "tref", "tspan", "view", "vkern"]), pt = k(["feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence"]), Rs = k(["animate", "color-profile", "cursor", "discard", "font-face", "font-face-format", "font-face-name", "font-face-src", "font-face-uri", "foreignobject", "hatch", "hatchpath", "mesh", "meshgradient", "meshpatch", "meshrow", "missing-glyph", "script", "set", "solidcolor", "unknown", "use"]), mt = k(["math", "menclose", "merror", "mfenced", "mfrac", "mglyph", "mi", "mlabeledtr", "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom", "mroot", "mrow", "ms", "mspace", "msqrt", "mstyle", "msub", "msup", "msubsup", "mtable", "mtd", "mtext", "mtr", "munder", "munderover", "mprescripts"]), ks = k(["maction", "maligngroup", "malignmark", "mlongdiv", "mscarries", "mscarry", "msgroup", "mstack", "msline", "msrow", "semantics", "annotation", "annotation-xml", "mprescripts", "none"]), pi = k(["#text"]), mi = k(["accept", "action", "align", "alt", "autocapitalize", "autocomplete", "autopictureinpicture", "autoplay", "background", "bgcolor", "border", "capture", "cellpadding", "cellspacing", "checked", "cite", "class", "clear", "color", "cols", "colspan", "controls", "controlslist", "coords", "crossorigin", "datetime", "decoding", "default", "dir", "disabled", "disablepictureinpicture", "disableremoteplayback", "download", "draggable", "enctype", "enterkeyhint", "exportparts", "face", "for", "headers", "height", "hidden", "high", "href", "hreflang", "id", "inert", "inputmode", "integrity", "ismap", "kind", "label", "lang", "list", "loading", "loop", "low", "max", "maxlength", "media", "method", "min", "minlength", "multiple", "muted", "name", "nonce", "noshade", "novalidate", "nowrap", "open", "optimum", "part", "pattern", "placeholder", "playsinline", "popover", "popovertarget", "popovertargetaction", "poster", "preload", "pubdate", "radiogroup", "readonly", "rel", "required", "rev", "reversed", "role", "rows", "rowspan", "spellcheck", "scope", "selected", "shape", "size", "sizes", "slot", "span", "srclang", "start", "src", "srcset", "step", "style", "summary", "tabindex", "title", "translate", "type", "usemap", "valign", "value", "width", "wrap", "xmlns", "slot"]), gt = k(["accent-height", "accumulate", "additive", "alignment-baseline", "amplitude", "ascent", "attributename", "attributetype", "azimuth", "basefrequency", "baseline-shift", "begin", "bias", "by", "class", "clip", "clippathunits", "clip-path", "clip-rule", "color", "color-interpolation", "color-interpolation-filters", "color-profile", "color-rendering", "cx", "cy", "d", "dx", "dy", "diffuseconstant", "direction", "display", "divisor", "dur", "edgemode", "elevation", "end", "exponent", "fill", "fill-opacity", "fill-rule", "filter", "filterunits", "flood-color", "flood-opacity", "font-family", "font-size", "font-size-adjust", "font-stretch", "font-style", "font-variant", "font-weight", "fx", "fy", "g1", "g2", "glyph-name", "glyphref", "gradientunits", "gradienttransform", "height", "href", "id", "image-rendering", "in", "in2", "intercept", "k", "k1", "k2", "k3", "k4", "kerning", "keypoints", "keysplines", "keytimes", "lang", "lengthadjust", "letter-spacing", "kernelmatrix", "kernelunitlength", "lighting-color", "local", "marker-end", "marker-mid", "marker-start", "markerheight", "markerunits", "markerwidth", "maskcontentunits", "maskunits", "max", "mask", "mask-type", "media", "method", "mode", "min", "name", "numoctaves", "offset", "operator", "opacity", "order", "orient", "orientation", "origin", "overflow", "paint-order", "path", "pathlength", "patterncontentunits", "patterntransform", "patternunits", "points", "preservealpha", "preserveaspectratio", "primitiveunits", "r", "rx", "ry", "radius", "refx", "refy", "repeatcount", "repeatdur", "restart", "result", "rotate", "scale", "seed", "shape-rendering", "slope", "specularconstant", "specularexponent", "spreadmethod", "startoffset", "stddeviation", "stitchtiles", "stop-color", "stop-opacity", "stroke-dasharray", "stroke-dashoffset", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-opacity", "stroke", "stroke-width", "style", "surfacescale", "systemlanguage", "tabindex", "tablevalues", "targetx", "targety", "transform", "transform-origin", "text-anchor", "text-decoration", "text-rendering", "textlength", "type", "u1", "u2", "unicode", "values", "viewbox", "visibility", "version", "vert-adv-y", "vert-origin-x", "vert-origin-y", "width", "word-spacing", "wrap", "writing-mode", "xchannelselector", "ychannelselector", "x", "x1", "x2", "xmlns", "y", "y1", "y2", "z", "zoomandpan"]), gi = k(["accent", "accentunder", "align", "bevelled", "close", "columnsalign", "columnlines", "columnspan", "denomalign", "depth", "dir", "display", "displaystyle", "encoding", "fence", "frame", "height", "href", "id", "largeop", "length", "linethickness", "lspace", "lquote", "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", "minsize", "movablelimits", "notation", "numalign", "open", "rowalign", "rowlines", "rowspacing", "rowspan", "rspace", "rquote", "scriptlevel", "scriptminsize", "scriptsizemultiplier", "selection", "separator", "separators", "stretchy", "subscriptshift", "supscriptshift", "symmetric", "voffset", "width", "xmlns"]), Be = k(["xlink:href", "xml:id", "xlink:title", "xml:space", "xmlns:xlink"]), Ms = G(/\{\{[\w\W]*|[\w\W]*\}\}/gm), xs = G(/<%[\w\W]*|[\w\W]*%>/gm), Fs = G(/\$\{[\w\W]*/gm), zs = G(/^data-[\-\w.\u00B7-\uFFFF]+$/), Us = G(/^aria-[\-\w]+$/), Ii = G(
   /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|matrix):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i
   // eslint-disable-line no-useless-escape
 ), Hs = G(/^(?:\w+script|data):/i), Vs = G(
@@ -1388,11 +1388,11 @@ function Pi() {
     Node: f,
     Element: E,
     NodeFilter: _,
-    NamedNodeMap: T = s.NamedNodeMap || s.MozNamedAttrMap,
+    NamedNodeMap: S = s.NamedNodeMap || s.MozNamedAttrMap,
     HTMLFormElement: v,
-    DOMParser: R,
+    DOMParser: L,
     trustedTypes: N
-  } = s, x = E.prototype, _e = we(x, "cloneNode"), Ce = we(x, "remove"), ke = we(x, "nextSibling"), Ye = we(x, "childNodes"), oe = we(x, "parentNode");
+  } = s, x = E.prototype, _e = we(x, "cloneNode"), Re = we(x, "remove"), ke = we(x, "nextSibling"), Ye = we(x, "childNodes"), oe = we(x, "parentNode");
   if (typeof c == "function") {
     const d = i.createElement("template");
     d.content && d.content.ownerDocument && (i = d.content.ownerDocument);
@@ -1423,8 +1423,8 @@ function Pi() {
   } = _i, O = null;
   const Pt = m({}, [...fi, ...ft, ...pt, ...mt, ...pi]);
   let I = null;
-  const Lt = m({}, [...mi, ...gt, ...gi, ...Be]);
-  let S = Object.seal(vt(null, {
+  const Ct = m({}, [...mi, ...gt, ...gi, ...Be]);
+  let T = Object.seal(vt(null, {
     tagNameCheck: {
       writable: !0,
       configurable: !1,
@@ -1458,19 +1458,19 @@ function Pi() {
       value: null
     }
   }));
-  let Rt = !0, Ze = !0, Ct = !1, kt = !0, ce = !1, Me = !0, ie = !1, Je = !1, Qe = !1, ue = !1, xe = !1, Fe = !1, Mt = !0, xt = !1;
-  const Ri = "user-content-";
-  let et = !0, Te = !1, he = {}, j = null;
+  let Lt = !0, Ze = !0, Rt = !1, kt = !0, ce = !1, Me = !0, ie = !1, Je = !1, Qe = !1, ue = !1, xe = !1, Fe = !1, Mt = !0, xt = !1;
+  const Li = "user-content-";
+  let et = !0, Se = !1, he = {}, j = null;
   const tt = m({}, ["annotation-xml", "audio", "colgroup", "desc", "foreignobject", "head", "iframe", "math", "mi", "mn", "mo", "ms", "mtext", "noembed", "noframes", "noscript", "plaintext", "script", "style", "svg", "template", "thead", "title", "video", "xmp"]);
   let Ft = null;
   const zt = m({}, ["audio", "video", "img", "source", "image", "track"]);
   let it = null;
   const Ut = m({}, ["alt", "class", "for", "id", "label", "name", "pattern", "placeholder", "role", "summary", "title", "value", "style", "xmlns"]), ze = "http://www.w3.org/1998/Math/MathML", Ue = "http://www.w3.org/2000/svg", J = "http://www.w3.org/1999/xhtml";
   let de = J, st = !1, nt = null;
-  const Ci = m({}, [ze, Ue, J], ht);
+  const Ri = m({}, [ze, Ue, J], ht);
   let He = m({}, ["mi", "mo", "mn", "ms", "mtext"]), Ve = m({}, ["annotation-xml"]);
   const ki = m({}, ["title", "style", "font", "a", "script"]);
-  let Se = null;
+  let Te = null;
   const Mi = ["application/xhtml+xml", "text/html"], xi = "text/html";
   let w = null, fe = null;
   const Fi = i.createElement("form"), Ht = function(n) {
@@ -1478,8 +1478,8 @@ function Pi() {
   }, rt = function() {
     let n = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
     if (!(fe && fe === n)) {
-      if ((!n || typeof n != "object") && (n = {}), n = K(n), Se = // eslint-disable-next-line unicorn/prefer-includes
-      Mi.indexOf(n.PARSER_MEDIA_TYPE) === -1 ? xi : n.PARSER_MEDIA_TYPE, w = Se === "application/xhtml+xml" ? ht : je, O = W(n, "ALLOWED_TAGS") ? m({}, n.ALLOWED_TAGS, w) : Pt, I = W(n, "ALLOWED_ATTR") ? m({}, n.ALLOWED_ATTR, w) : Lt, nt = W(n, "ALLOWED_NAMESPACES") ? m({}, n.ALLOWED_NAMESPACES, ht) : Ci, it = W(n, "ADD_URI_SAFE_ATTR") ? m(K(Ut), n.ADD_URI_SAFE_ATTR, w) : Ut, Ft = W(n, "ADD_DATA_URI_TAGS") ? m(K(zt), n.ADD_DATA_URI_TAGS, w) : zt, j = W(n, "FORBID_CONTENTS") ? m({}, n.FORBID_CONTENTS, w) : tt, ye = W(n, "FORBID_TAGS") ? m({}, n.FORBID_TAGS, w) : K({}), Ke = W(n, "FORBID_ATTR") ? m({}, n.FORBID_ATTR, w) : K({}), he = W(n, "USE_PROFILES") ? n.USE_PROFILES : !1, Rt = n.ALLOW_ARIA_ATTR !== !1, Ze = n.ALLOW_DATA_ATTR !== !1, Ct = n.ALLOW_UNKNOWN_PROTOCOLS || !1, kt = n.ALLOW_SELF_CLOSE_IN_ATTR !== !1, ce = n.SAFE_FOR_TEMPLATES || !1, Me = n.SAFE_FOR_XML !== !1, ie = n.WHOLE_DOCUMENT || !1, ue = n.RETURN_DOM || !1, xe = n.RETURN_DOM_FRAGMENT || !1, Fe = n.RETURN_TRUSTED_TYPE || !1, Qe = n.FORCE_BODY || !1, Mt = n.SANITIZE_DOM !== !1, xt = n.SANITIZE_NAMED_PROPS || !1, et = n.KEEP_CONTENT !== !1, Te = n.IN_PLACE || !1, Dt = n.ALLOWED_URI_REGEXP || Ii, de = n.NAMESPACE || J, He = n.MATHML_TEXT_INTEGRATION_POINTS || He, Ve = n.HTML_INTEGRATION_POINTS || Ve, S = n.CUSTOM_ELEMENT_HANDLING || {}, n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (S.tagNameCheck = n.CUSTOM_ELEMENT_HANDLING.tagNameCheck), n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (S.attributeNameCheck = n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), n.CUSTOM_ELEMENT_HANDLING && typeof n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (S.allowCustomizedBuiltInElements = n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), ce && (Ze = !1), xe && (ue = !0), he && (O = m({}, pi), I = [], he.html === !0 && (m(O, fi), m(I, mi)), he.svg === !0 && (m(O, ft), m(I, gt), m(I, Be)), he.svgFilters === !0 && (m(O, pt), m(I, gt), m(I, Be)), he.mathMl === !0 && (m(O, mt), m(I, gi), m(I, Be))), n.ADD_TAGS && (typeof n.ADD_TAGS == "function" ? le.tagCheck = n.ADD_TAGS : (O === Pt && (O = K(O)), m(O, n.ADD_TAGS, w))), n.ADD_ATTR && (typeof n.ADD_ATTR == "function" ? le.attributeCheck = n.ADD_ATTR : (I === Lt && (I = K(I)), m(I, n.ADD_ATTR, w))), n.ADD_URI_SAFE_ATTR && m(it, n.ADD_URI_SAFE_ATTR, w), n.FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.FORBID_CONTENTS, w)), n.ADD_FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.ADD_FORBID_CONTENTS, w)), et && (O["#text"] = !0), ie && m(O, ["html", "head", "body"]), O.table && (m(O, ["tbody"]), delete ye.tbody), n.TRUSTED_TYPES_POLICY) {
+      if ((!n || typeof n != "object") && (n = {}), n = K(n), Te = // eslint-disable-next-line unicorn/prefer-includes
+      Mi.indexOf(n.PARSER_MEDIA_TYPE) === -1 ? xi : n.PARSER_MEDIA_TYPE, w = Te === "application/xhtml+xml" ? ht : je, O = W(n, "ALLOWED_TAGS") ? m({}, n.ALLOWED_TAGS, w) : Pt, I = W(n, "ALLOWED_ATTR") ? m({}, n.ALLOWED_ATTR, w) : Ct, nt = W(n, "ALLOWED_NAMESPACES") ? m({}, n.ALLOWED_NAMESPACES, ht) : Ri, it = W(n, "ADD_URI_SAFE_ATTR") ? m(K(Ut), n.ADD_URI_SAFE_ATTR, w) : Ut, Ft = W(n, "ADD_DATA_URI_TAGS") ? m(K(zt), n.ADD_DATA_URI_TAGS, w) : zt, j = W(n, "FORBID_CONTENTS") ? m({}, n.FORBID_CONTENTS, w) : tt, ye = W(n, "FORBID_TAGS") ? m({}, n.FORBID_TAGS, w) : K({}), Ke = W(n, "FORBID_ATTR") ? m({}, n.FORBID_ATTR, w) : K({}), he = W(n, "USE_PROFILES") ? n.USE_PROFILES : !1, Lt = n.ALLOW_ARIA_ATTR !== !1, Ze = n.ALLOW_DATA_ATTR !== !1, Rt = n.ALLOW_UNKNOWN_PROTOCOLS || !1, kt = n.ALLOW_SELF_CLOSE_IN_ATTR !== !1, ce = n.SAFE_FOR_TEMPLATES || !1, Me = n.SAFE_FOR_XML !== !1, ie = n.WHOLE_DOCUMENT || !1, ue = n.RETURN_DOM || !1, xe = n.RETURN_DOM_FRAGMENT || !1, Fe = n.RETURN_TRUSTED_TYPE || !1, Qe = n.FORCE_BODY || !1, Mt = n.SANITIZE_DOM !== !1, xt = n.SANITIZE_NAMED_PROPS || !1, et = n.KEEP_CONTENT !== !1, Se = n.IN_PLACE || !1, Dt = n.ALLOWED_URI_REGEXP || Ii, de = n.NAMESPACE || J, He = n.MATHML_TEXT_INTEGRATION_POINTS || He, Ve = n.HTML_INTEGRATION_POINTS || Ve, T = n.CUSTOM_ELEMENT_HANDLING || {}, n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (T.tagNameCheck = n.CUSTOM_ELEMENT_HANDLING.tagNameCheck), n.CUSTOM_ELEMENT_HANDLING && Ht(n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (T.attributeNameCheck = n.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), n.CUSTOM_ELEMENT_HANDLING && typeof n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (T.allowCustomizedBuiltInElements = n.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), ce && (Ze = !1), xe && (ue = !0), he && (O = m({}, pi), I = [], he.html === !0 && (m(O, fi), m(I, mi)), he.svg === !0 && (m(O, ft), m(I, gt), m(I, Be)), he.svgFilters === !0 && (m(O, pt), m(I, gt), m(I, Be)), he.mathMl === !0 && (m(O, mt), m(I, gi), m(I, Be))), n.ADD_TAGS && (typeof n.ADD_TAGS == "function" ? le.tagCheck = n.ADD_TAGS : (O === Pt && (O = K(O)), m(O, n.ADD_TAGS, w))), n.ADD_ATTR && (typeof n.ADD_ATTR == "function" ? le.attributeCheck = n.ADD_ATTR : (I === Ct && (I = K(I)), m(I, n.ADD_ATTR, w))), n.ADD_URI_SAFE_ATTR && m(it, n.ADD_URI_SAFE_ATTR, w), n.FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.FORBID_CONTENTS, w)), n.ADD_FORBID_CONTENTS && (j === tt && (j = K(j)), m(j, n.ADD_FORBID_CONTENTS, w)), et && (O["#text"] = !0), ie && m(O, ["html", "head", "body"]), O.table && (m(O, ["tbody"]), delete ye.tbody), n.TRUSTED_TYPES_POLICY) {
         if (typeof n.TRUSTED_TYPES_POLICY.createHTML != "function")
           throw be('TRUSTED_TYPES_POLICY configuration option must provide a "createHTML" hook.');
         if (typeof n.TRUSTED_TYPES_POLICY.createScriptURL != "function")
@@ -1489,14 +1489,14 @@ function Pi() {
         b === void 0 && (b = $s(N, r)), b !== null && typeof $ == "string" && ($ = b.createHTML(""));
       k && k(n), fe = n;
     }
-  }, Vt = m({}, [...ft, ...pt, ...Cs]), Gt = m({}, [...mt, ...ks]), zi = function(n) {
+  }, Vt = m({}, [...ft, ...pt, ...Rs]), Gt = m({}, [...mt, ...ks]), zi = function(n) {
     let a = oe(n);
     (!a || !a.tagName) && (a = {
       namespaceURI: de,
       tagName: "template"
     });
     const u = je(n.tagName), y = je(a.tagName);
-    return nt[n.namespaceURI] ? n.namespaceURI === Ue ? a.namespaceURI === J ? u === "svg" : a.namespaceURI === ze ? u === "svg" && (y === "annotation-xml" || He[y]) : !!Vt[u] : n.namespaceURI === ze ? a.namespaceURI === J ? u === "math" : a.namespaceURI === Ue ? u === "math" && Ve[y] : !!Gt[u] : n.namespaceURI === J ? a.namespaceURI === Ue && !Ve[y] || a.namespaceURI === ze && !He[y] ? !1 : !Gt[u] && (ki[u] || !Vt[u]) : !!(Se === "application/xhtml+xml" && nt[n.namespaceURI]) : !1;
+    return nt[n.namespaceURI] ? n.namespaceURI === Ue ? a.namespaceURI === J ? u === "svg" : a.namespaceURI === ze ? u === "svg" && (y === "annotation-xml" || He[y]) : !!Vt[u] : n.namespaceURI === ze ? a.namespaceURI === J ? u === "math" : a.namespaceURI === Ue ? u === "math" && Ve[y] : !!Gt[u] : n.namespaceURI === J ? a.namespaceURI === Ue && !Ve[y] || a.namespaceURI === ze && !He[y] ? !1 : !Gt[u] && (ki[u] || !Vt[u]) : !!(Te === "application/xhtml+xml" && nt[n.namespaceURI]) : !1;
   }, Y = function(n) {
     Ae(e.removed, {
       element: n
@@ -1504,7 +1504,7 @@ function Pi() {
     try {
       oe(n).removeChild(n);
     } catch {
-      Ce(n);
+      Re(n);
     }
   }, se = function(n, a) {
     try {
@@ -1537,11 +1537,11 @@ function Pi() {
       const A = dt(n, /^[\r\n\t ]+/);
       u = A && A[0];
     }
-    Se === "application/xhtml+xml" && de === J && (n = '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>' + n + "</body></html>");
+    Te === "application/xhtml+xml" && de === J && (n = '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>' + n + "</body></html>");
     const y = b ? b.createHTML(n) : n;
     if (de === J)
       try {
-        a = new R().parseFromString(y, Se);
+        a = new L().parseFromString(y, Te);
       } catch {
       }
     if (!a || !a.documentElement) {
@@ -1551,8 +1551,8 @@ function Pi() {
       } catch {
       }
     }
-    const L = a.body || a.documentElement;
-    return n && u && L.insertBefore(i.createTextNode(u), L.childNodes[0] || null), de === J ? B.call(a, ie ? "html" : "body")[0] : ie ? a.documentElement : L;
+    const C = a.body || a.documentElement;
+    return n && u && C.insertBefore(i.createTextNode(u), C.childNodes[0] || null), de === J ? B.call(a, ie ? "html" : "body")[0] : ie ? a.documentElement : C;
   }, $t = function(n) {
     return p.call(
       n.ownerDocument || n,
@@ -1562,7 +1562,7 @@ function Pi() {
       null
     );
   }, ot = function(n) {
-    return n instanceof v && (typeof n.nodeName != "string" || typeof n.textContent != "string" || typeof n.removeChild != "function" || !(n.attributes instanceof T) || typeof n.removeAttribute != "function" || typeof n.setAttribute != "function" || typeof n.namespaceURI != "string" || typeof n.insertBefore != "function" || typeof n.hasChildNodes != "function");
+    return n instanceof v && (typeof n.nodeName != "string" || typeof n.textContent != "string" || typeof n.removeChild != "function" || !(n.attributes instanceof S) || typeof n.removeAttribute != "function" || typeof n.setAttribute != "function" || typeof n.namespaceURI != "string" || typeof n.insertBefore != "function" || typeof n.hasChildNodes != "function");
   }, Bt = function(n) {
     return typeof f == "function" && n instanceof f;
   };
@@ -1579,24 +1579,24 @@ function Pi() {
     if (Q(l.uponSanitizeElement, n, {
       tagName: u,
       allowedTags: O
-    }), Me && n.hasChildNodes() && !Bt(n.firstElementChild) && C(/<[/\w!]/g, n.innerHTML) && C(/<[/\w!]/g, n.textContent) || n.nodeType === Ne.progressingInstruction || Me && n.nodeType === Ne.comment && C(/<[/\w]/g, n.data))
+    }), Me && n.hasChildNodes() && !Bt(n.firstElementChild) && R(/<[/\w!]/g, n.innerHTML) && R(/<[/\w!]/g, n.textContent) || n.nodeType === Ne.progressingInstruction || Me && n.nodeType === Ne.comment && R(/<[/\w]/g, n.data))
       return Y(n), !0;
     if (!(le.tagCheck instanceof Function && le.tagCheck(u)) && (!O[u] || ye[u])) {
-      if (!ye[u] && Xt(u) && (S.tagNameCheck instanceof RegExp && C(S.tagNameCheck, u) || S.tagNameCheck instanceof Function && S.tagNameCheck(u)))
+      if (!ye[u] && Xt(u) && (T.tagNameCheck instanceof RegExp && R(T.tagNameCheck, u) || T.tagNameCheck instanceof Function && T.tagNameCheck(u)))
         return !1;
       if (et && !j[u]) {
-        const y = oe(n) || n.parentNode, L = Ye(n) || n.childNodes;
-        if (L && y) {
-          const A = L.length;
+        const y = oe(n) || n.parentNode, C = Ye(n) || n.childNodes;
+        if (C && y) {
+          const A = C.length;
           for (let z = A - 1; z >= 0; --z) {
-            const ee = _e(L[z], !0);
+            const ee = _e(C[z], !0);
             ee.__removalCount = (n.__removalCount || 0) + 1, y.insertBefore(ee, ke(n));
           }
         }
       }
       return Y(n), !0;
     }
-    return n instanceof E && !zi(n) || (u === "noscript" || u === "noembed" || u === "noframes") && C(/<\/no(script|embed|frames)/i, n.innerHTML) ? (Y(n), !0) : (ce && n.nodeType === Ne.text && (a = n.textContent, $e([g, P, Z], (y) => {
+    return n instanceof E && !zi(n) || (u === "noscript" || u === "noembed" || u === "noframes") && R(/<\/no(script|embed|frames)/i, n.innerHTML) ? (Y(n), !0) : (ce && n.nodeType === Ne.text && (a = n.textContent, $e([g, P, Z], (y) => {
       a = ve(a, y, " ");
     }), n.textContent !== a && (Ae(e.removed, {
       element: n.cloneNode()
@@ -1604,22 +1604,22 @@ function Pi() {
   }, Yt = function(n, a, u) {
     if (Mt && (a === "id" || a === "name") && (u in i || u in Fi))
       return !1;
-    if (!(Ze && !Ke[a] && C(Ee, a))) {
-      if (!(Rt && C(Xe, a))) {
+    if (!(Ze && !Ke[a] && R(Ee, a))) {
+      if (!(Lt && R(Xe, a))) {
         if (!(le.attributeCheck instanceof Function && le.attributeCheck(a, n))) {
           if (!I[a] || Ke[a]) {
             if (
               // First condition does a very basic check if a) it's basically a valid custom element tagname AND
               // b) if the tagName passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
               // and c) if the attribute name passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.attributeNameCheck
-              !(Xt(n) && (S.tagNameCheck instanceof RegExp && C(S.tagNameCheck, n) || S.tagNameCheck instanceof Function && S.tagNameCheck(n)) && (S.attributeNameCheck instanceof RegExp && C(S.attributeNameCheck, a) || S.attributeNameCheck instanceof Function && S.attributeNameCheck(a, n)) || // Alternative, second condition checks if it's an `is`-attribute, AND
+              !(Xt(n) && (T.tagNameCheck instanceof RegExp && R(T.tagNameCheck, n) || T.tagNameCheck instanceof Function && T.tagNameCheck(n)) && (T.attributeNameCheck instanceof RegExp && R(T.attributeNameCheck, a) || T.attributeNameCheck instanceof Function && T.attributeNameCheck(a, n)) || // Alternative, second condition checks if it's an `is`-attribute, AND
               // the value passes whatever the user has configured for CUSTOM_ELEMENT_HANDLING.tagNameCheck
-              a === "is" && S.allowCustomizedBuiltInElements && (S.tagNameCheck instanceof RegExp && C(S.tagNameCheck, u) || S.tagNameCheck instanceof Function && S.tagNameCheck(u)))
+              a === "is" && T.allowCustomizedBuiltInElements && (T.tagNameCheck instanceof RegExp && R(T.tagNameCheck, u) || T.tagNameCheck instanceof Function && T.tagNameCheck(u)))
             ) return !1;
           } else if (!it[a]) {
-            if (!C(Dt, ve(u, te, ""))) {
+            if (!R(Dt, ve(u, te, ""))) {
               if (!((a === "src" || a === "xlink:href" || a === "href") && n !== "script" && Ds(u, "data:") === 0 && Ft[n])) {
-                if (!(Ct && !C(qe, ve(u, te, "")))) {
+                if (!(Rt && !R(qe, ve(u, te, "")))) {
                   if (u)
                     return !1;
                 }
@@ -1648,13 +1648,13 @@ function Pi() {
     };
     let y = a.length;
     for (; y--; ) {
-      const L = a[y], {
+      const C = a[y], {
         name: A,
         namespaceURI: z,
         value: ee
-      } = L, pe = w(A), at = ee;
+      } = C, pe = w(A), at = ee;
       let D = A === "value" ? at : Ps(at);
-      if (u.attrName = pe, u.attrValue = D, u.keepAttr = !0, u.forceKeepAttr = void 0, Q(l.uponSanitizeAttribute, n, u), D = u.attrValue, xt && (pe === "id" || pe === "name") && (se(A, n), D = Ri + D), Me && C(/((--!?|])>)|<\/(style|title|textarea)/i, D)) {
+      if (u.attrName = pe, u.attrValue = D, u.keepAttr = !0, u.forceKeepAttr = void 0, Q(l.uponSanitizeAttribute, n, u), D = u.attrValue, xt && (pe === "id" || pe === "name") && (se(A, n), D = Li + D), Me && R(/((--!?|])>)|<\/(style|title|textarea)/i, D)) {
         se(A, n);
         continue;
       }
@@ -1668,7 +1668,7 @@ function Pi() {
         se(A, n);
         continue;
       }
-      if (!kt && C(/\/>/i, D)) {
+      if (!kt && R(/\/>/i, D)) {
         se(A, n);
         continue;
       }
@@ -1707,7 +1707,7 @@ function Pi() {
     Q(l.afterSanitizeShadowDOM, n, null);
   };
   return e.sanitize = function(d) {
-    let n = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, a = null, u = null, y = null, L = null;
+    let n = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, a = null, u = null, y = null, C = null;
     if (st = !d, st && (d = "<!-->"), typeof d != "string" && !Bt(d))
       if (typeof d.toString == "function") {
         if (d = d.toString(), typeof d != "string")
@@ -1716,7 +1716,7 @@ function Pi() {
         throw be("toString is not a function");
     if (!e.isSupported)
       return d;
-    if (Je || rt(n), e.removed = [], typeof d == "string" && (Te = !1), Te) {
+    if (Je || rt(n), e.removed = [], typeof d == "string" && (Se = !1), Se) {
       if (d.nodeName) {
         const ee = w(d.nodeName);
         if (!O[ee] || ye[ee])
@@ -1732,21 +1732,21 @@ function Pi() {
         return ue ? null : Fe ? $ : "";
     }
     a && Qe && Y(a.firstChild);
-    const A = $t(Te ? d : a);
+    const A = $t(Se ? d : a);
     for (; y = A.nextNode(); )
       jt(y), qt(y), y.content instanceof o && Ui(y.content);
-    if (Te)
+    if (Se)
       return d;
     if (ue) {
       if (xe)
-        for (L = It.call(a.ownerDocument); a.firstChild; )
-          L.appendChild(a.firstChild);
+        for (C = It.call(a.ownerDocument); a.firstChild; )
+          C.appendChild(a.firstChild);
       else
-        L = a;
-      return (I.shadowroot || I.shadowrootmode) && (L = h.call(t, L, !0)), L;
+        C = a;
+      return (I.shadowroot || I.shadowrootmode) && (C = h.call(t, C, !0)), C;
     }
     let z = ie ? a.outerHTML : a.innerHTML;
-    return ie && O["!doctype"] && a.ownerDocument && a.ownerDocument.doctype && a.ownerDocument.doctype.name && C(Di, a.ownerDocument.doctype.name) && (z = "<!DOCTYPE " + a.ownerDocument.doctype.name + `>
+    return ie && O["!doctype"] && a.ownerDocument && a.ownerDocument.doctype && a.ownerDocument.doctype.name && R(Di, a.ownerDocument.doctype.name) && (z = "<!DOCTYPE " + a.ownerDocument.doctype.name + `>
 ` + z), ce && $e([g, P, Z], (ee) => {
       z = ve(z, ee, " ");
     }), b && Fe ? b.createHTML(z) : z;
@@ -1774,7 +1774,7 @@ function Pi() {
   }, e;
 }
 var Bs = Pi();
-const Li = (s, e) => {
+const Ci = (s, e) => {
   const i = s.__vccOpts || s;
   for (const [t, r] of e)
     i[t] = r;
@@ -1838,7 +1838,7 @@ function Ks(s, e, i, t, r, o) {
     }, null, 42, qs)
   ], 8, Ys);
 }
-const Zs = /* @__PURE__ */ Li(js, [["render", Ks]]), Js = {
+const Zs = /* @__PURE__ */ Ci(js, [["render", Ks]]), Js = {
   name: "FlickrGallery",
   components: { Image: Zs },
   props: {
@@ -1851,7 +1851,8 @@ const Zs = /* @__PURE__ */ Li(js, [["render", Ks]]), Js = {
     photosetId: { type: String, default: "" },
     tags: { type: String, default: "" },
     extras: { type: String, default: "" },
-    perPage: { type: Number, default: 18 }
+    perPage: { type: Number, default: 18 },
+    importCss: { type: Boolean, default: !0 }
   },
   data: () => ({
     galleryID: "flickr",
@@ -1866,7 +1867,16 @@ const Zs = /* @__PURE__ */ Li(js, [["render", Ks]]), Js = {
   }),
   async beforeMount() {
     const s = "flickr-" + this.$.uid;
-    this.galleryID = this.galleryID + "-" + this.$.uid, this.flickrStore = vs(s), this.extras && (this.defaultExtras = this.extras), await this.loadFlickrPhotos();
+    if (this.galleryID = this.galleryID + "-" + this.$.uid, this.flickrStore = vs(s), this.importCss)
+      try {
+        await Promise.all([
+          Promise.resolve({               }),
+          Promise.resolve({                  })
+        ]);
+      } catch (e) {
+        console.error("CSS konnte nicht geladen werden:", e);
+      }
+    this.extras && (this.defaultExtras = this.extras), await this.loadFlickrPhotos();
   },
   mounted() {
     this.initLightbox();
@@ -2001,7 +2011,7 @@ function hn(s, e, i, t, r, o) {
     ])) : ct("", !0)
   ], 8, Qs);
 }
-const dn = /* @__PURE__ */ Li(Js, [["render", hn]]), fn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const dn = /* @__PURE__ */ Ci(Js, [["render", hn]]), fn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: dn
 }, Symbol.toStringTag, { value: "Module" })), mn = {
